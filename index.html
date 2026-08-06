@@ -1,0 +1,354 @@
+<!doctype html>
+<!--Definir idioma, responsividade, título e caminho CSS-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Plataforma informativa para visualização de dados hidrológicos e meteorológicos de Agudo, RS."
+    />
+
+    <title>Plataforma Hidrometeorológica de Agudo, RS</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <!--Início do projeto-->
+
+  <body>
+    <header>
+      <a href="#conteudo-principal"> Plataforma Hidrometeorológica de Agudo </a>
+
+      <p>Agudo, RS</p>
+
+      <nav aria-label="Navegação principal">
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#historico">Histórico</a></li>
+          <li><a href="#estacoes">Estações</a></li>
+          <li><a href="#metodologia">Metodologia</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <a href="#canais-oficiais">Canais oficiais</a>
+    </header>
+
+    <main id="conteudo-principal">
+      <section id="inicio" aria-labelledby="situacao-titulo">
+        <p><strong>Dados de teste</strong></p>
+
+        <h1 id="situacao-titulo">Situação atual</h1>
+
+        <p>Cota de referência ainda não validada.</p>
+        <p>O Rio Jacuí está subindo lentamente.</p>
+
+        <dl>
+          <div>
+            <dt>Nível do rio</dt>
+            <dd>6,20 m</dd>
+          </div>
+
+          <div>
+            <dt>Última medição</dt>
+            <dd>
+              <time datetime="2026-08-06T10:45:00-03:00">
+                6 de agosto de 2026, às 10h45
+              </time>
+            </dd>
+          </div>
+
+          <div>
+            <dt>Status</dt>
+            <dd>Provisório — dado atualizado</dd>
+          </div>
+        </dl>
+
+        <p>Tendência calculada pela plataforma com dados simulados.</p>
+      </section>
+
+      <!-- orientação e canais oficiais-->
+
+      <section id="canais-oficiais" aria-labelledby="canais-titulo">
+        <h2 id="canais-titulo">Orientação oficial</h2>
+
+        <p>
+          Esta plataforma possui caráter informativo e não constitui um canal
+          oficial de emergência.
+        </p>
+
+        <p>Para consultar avisos e orientações oficiais, acesse:</p>
+
+        <ul>
+          <li>
+            <a
+              href="https://www.defesacivil.rs.gov.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Defesa Civil do Rio Grande do Sul
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://alertas2.inmet.gov.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Avisos meteorológicos do INMET
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!--cartões de indicadores-->
+      <section aria-labelledby="indicadores-titulo">
+        <h2 id="indicadores-titulo">Condições observadas</h2>
+
+        <article aria-labelledby="nivel-titulo">
+          <h3 id="nivel-titulo">Nível do rio</h3>
+
+          <p>
+            <strong>
+              <data value="6.20">6,20 m</data>
+            </strong>
+          </p>
+
+          <dl>
+            <div>
+              <dt>Rio</dt>
+              <dd>Rio Jacuí</dd>
+            </div>
+
+            <div>
+              <dt>Estação</dt>
+              <dd>Estação de teste</dd>
+            </div>
+
+            <div>
+              <dt>Tendência</dt>
+              <dd>Subindo lentamente</dd>
+            </div>
+
+            <div>
+              <dt>Horário da medição</dt>
+              <dd>
+                <time datetime="2026-08-06T10:45:00-03:00">
+                  6 de agosto de 2026, às 10h45
+                </time>
+              </dd>
+            </div>
+
+            <div>
+              <dt>Status</dt>
+              <dd>Provisório — dados de teste</dd>
+            </div>
+
+            <div>
+              <dt>Fonte</dt>
+              <dd>Dados simulados para desenvolvimento</dd>
+            </div>
+          </dl>
+
+          <details>
+            <summary>Como interpretar</summary>
+
+            <p>
+              O nível indica a altura da água medida na estação. Ele deve ser
+              interpretado em relação às cotas de referência validadas para esse
+              local.
+            </p>
+
+            <p>
+              Um rio subindo não significa necessariamente que haverá inundação.
+              A tendência informa apenas a variação recente do nível.
+            </p>
+          </details>
+        </article>
+        <article aria-labelledby="chuva-titulo">
+          <h3 id="chuva-titulo">Chuva observada</h3>
+
+          <p>
+            <strong>
+              <data value="12.4">12,4 mm</data>
+            </strong>
+            nas últimas 24 horas
+          </p>
+
+          <dl>
+            <div>
+              <dt>Início do período</dt>
+              <dd>
+                <time datetime="2026-08-05T10:45:00-03:00">
+                  5 de agosto de 2026, às 10h45
+                </time>
+              </dd>
+            </div>
+
+            <div>
+              <dt>Fim do período</dt>
+              <dd>
+                <time datetime="2026-08-06T10:45:00-03:00">
+                  6 de agosto de 2026, às 10h45
+                </time>
+              </dd>
+            </div>
+
+            <div>
+              <dt>Status</dt>
+              <dd>Provisório — dados de teste</dd>
+            </div>
+
+            <div>
+              <dt>Fonte</dt>
+              <dd>Dados simulados para desenvolvimento</dd>
+            </div>
+          </dl>
+
+          <section aria-labelledby="previsao-titulo">
+            <h4 id="previsao-titulo">Previsão meteorológica</h4>
+
+            <p>
+              Previsão simulada: possibilidade de chuva nas próximas 24 horas.
+            </p>
+
+            <p>A previsão representa uma estimativa e não uma medição.</p>
+          </section>
+
+          <details>
+            <summary>Ver outros períodos</summary>
+
+            <ul>
+              <li>Última hora: 0,0 mm</li>
+              <li>Últimas 6 horas: 3,2 mm</li>
+              <li>Últimas 24 horas: 12,4 mm</li>
+              <li>Últimos 7 dias: dados indisponíveis</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Fonte e modelo</summary>
+
+            <p>
+              Os valores deste protótipo são simulados e não utilizam ainda uma
+              estação ou modelo meteorológico real.
+            </p>
+          </details>
+        </article>
+      </section>
+
+      <section id="historico" aria-labelledby="historico-titulo">
+        <h2 id="historico-titulo">Histórico do nível do rio</h2>
+
+        <p>
+          Nas últimas seis horas, o nível aumentou 3 cm. Resultado calculado com
+          dados simulados.
+        </p>
+
+        <div aria-label="Selecionar período do histórico">
+          <button type="button" aria-pressed="true">24 horas</button>
+
+          <button type="button" aria-pressed="false">7 dias</button>
+
+          <button type="button" aria-pressed="false">30 dias</button>
+        </div>
+
+        <figure>
+          <div
+            id="grafico-nivel"
+            role="img"
+            aria-label="Espaço reservado para o gráfico do nível do Rio Jacuí nas últimas 24 horas."
+          >
+            <p>O gráfico será apresentado nesta área.</p>
+          </div>
+
+          <figcaption>
+            Nível do Rio Jacuí nas últimas 24 horas. Dados simulados para
+            desenvolvimento.
+          </figcaption>
+        </figure>
+
+        <details>
+          <summary>Ver como tabela</summary>
+
+          <table>
+            <caption>
+              Medições simuladas do nível do Rio Jacuí
+            </caption>
+
+            <thead>
+              <tr>
+                <th scope="col">Data e hora</th>
+                <th scope="col">Nível</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>
+                  <time datetime="2026-08-06T04:45:00-03:00">
+                    6 de agosto, 04h45
+                  </time>
+                </td>
+                <td>6,17 m</td>
+                <td>Válido</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <time datetime="2026-08-06T06:45:00-03:00">
+                    6 de agosto, 06h45
+                  </time>
+                </td>
+                <td>6,18 m</td>
+                <td>Válido</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <time datetime="2026-08-06T08:45:00-03:00">
+                    6 de agosto, 08h45
+                  </time>
+                </td>
+                <td>Sem medição</td>
+                <td>Dado indisponível</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <time datetime="2026-08-06T10:45:00-03:00">
+                    6 de agosto, 10h45
+                  </time>
+                </td>
+                <td>6,20 m</td>
+                <td>Válido</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
+
+        <p>Fonte: dados simulados para desenvolvimento.</p>
+      </section>
+    </main>
+        <footer>
+            <div id="sobre" aria-labelledby="responsaveis-titulo">
+                <h2 id="responsaveis-titulo">Responsáveis pelo projeto</h2>
+                <!--Responsáveis pelo projeto-->
+                <ul>
+                    <li>Rafael Slovinscki | Desenvolvedor</li>
+                    <li>Nome do responsável 2</li>
+                    <li>Nome do responsável 3</li>
+                </ul>
+
+                <p>
+                    Projeto desenvolvido para divulgação de informações
+                    hidrológicas e meteorológicas de Agudo, RS.
+                </p>
+            </div>
+        </footer>
+  </body>
+</html>

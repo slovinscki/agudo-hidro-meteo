@@ -1,0 +1,591 @@
+/* ========================================================================== 
+   1. Fundacao visual — mobile first
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  --cor-fundo: #08090a;
+  --cor-superficie: #121416;
+  --cor-superficie-elevada: #191c1f;
+  --cor-borda: #34383d;
+  --cor-texto: #f5f7f8;
+  --cor-texto-secundario: #aeb6bd;
+  --cor-agua: #62e6ff;
+  --cor-agua-forte: #00b8d9;
+  --cor-lima: #d7ff45;
+  --cor-aviso: #ffcf4a;
+  --cor-foco: #ffffff;
+
+  --fonte-principal: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --espaco-1: 0.5rem;
+  --espaco-2: 0.75rem;
+  --espaco-3: 1rem;
+  --espaco-4: 1.5rem;
+  --espaco-5: 2rem;
+  --espaco-6: 3rem;
+  --raio: 0.75rem;
+  --largura-conteudo: 75rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
+}
+
+body {
+  min-width: 20rem;
+  margin: 0;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte-principal);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+a,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: var(--cor-agua);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--cor-lima);
+}
+
+:focus-visible {
+  outline: 0.1875rem solid var(--cor-foco);
+  outline-offset: 0.25rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+dl,
+ul,
+figure {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--cor-texto);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+h1 {
+  max-width: 12ch;
+  margin-bottom: var(--espaco-3);
+  font-size: clamp(2.5rem, 12vw, 5.5rem);
+  letter-spacing: -0.06em;
+}
+
+h2 {
+  margin-bottom: var(--espaco-4);
+  font-size: clamp(1.75rem, 8vw, 3.5rem);
+  letter-spacing: -0.045em;
+}
+
+h3 {
+  margin-bottom: var(--espaco-3);
+  font-size: clamp(1.4rem, 6vw, 2rem);
+  letter-spacing: -0.025em;
+}
+
+h4 {
+  margin-bottom: var(--espaco-2);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+ul {
+  padding-left: 1.25rem;
+}
+
+/* ========================================================================== 
+   2. Cabecalho
+   ========================================================================== */
+
+body > header {
+  display: grid;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3);
+  border-bottom: 0.0625rem solid var(--cor-borda);
+  background: rgb(8 9 10 / 94%);
+}
+
+body > header > a:first-child {
+  max-width: 20ch;
+  color: var(--cor-texto);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.1;
+  text-decoration: none;
+}
+
+body > header > p {
+  margin-bottom: 0;
+  color: var(--cor-texto-secundario);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+nav {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+nav ul {
+  display: flex;
+  width: max-content;
+  gap: var(--espaco-4);
+  margin-bottom: 0;
+  padding: 0 0 var(--espaco-1);
+  list-style: none;
+}
+
+nav a {
+  color: var(--cor-texto-secundario);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+body > header > a:last-child,
+#canais-oficiais li a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espaco-2) var(--espaco-3);
+  border: 0.0625rem solid var(--cor-lima);
+  border-radius: 999rem;
+  color: var(--cor-lima);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+body > header > a:last-child {
+  width: fit-content;
+}
+
+/* ========================================================================== 
+   3. Estrutura e situacao atual
+   ========================================================================== */
+
+main > section,
+footer > div {
+  padding: var(--espaco-6) var(--espaco-3);
+}
+
+main > section + section {
+  border-top: 0.0625rem solid var(--cor-borda);
+}
+
+#inicio {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 90% 15%, rgb(0 184 217 / 22%), transparent 35%),
+    linear-gradient(145deg, #101417 0%, var(--cor-fundo) 70%);
+}
+
+#inicio::after {
+  position: absolute;
+  right: -5rem;
+  bottom: -8rem;
+  width: 16rem;
+  height: 16rem;
+  border: 2.5rem solid rgb(98 230 255 / 8%);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+#inicio > p:first-child {
+  width: fit-content;
+  margin-bottom: var(--espaco-4);
+  padding: 0.35rem 0.7rem;
+  border: 0.0625rem solid var(--cor-aviso);
+  border-radius: 999rem;
+  color: var(--cor-aviso);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#inicio > p:nth-of-type(2) {
+  max-width: 34rem;
+  color: var(--cor-texto-secundario);
+  font-size: 1.1rem;
+}
+
+#inicio > p:nth-of-type(3) {
+  max-width: 24ch;
+  color: var(--cor-agua);
+  font-size: clamp(1.5rem, 7vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+#inicio > dl {
+  display: grid;
+  gap: 0;
+  margin: var(--espaco-5) 0;
+  border-top: 0.0625rem solid var(--cor-borda);
+}
+
+#inicio > dl > div {
+  padding: var(--espaco-3) 0;
+  border-bottom: 0.0625rem solid var(--cor-borda);
+}
+
+dt {
+  color: var(--cor-texto-secundario);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+dd {
+  margin-left: 0;
+  color: var(--cor-texto);
+}
+
+#inicio > dl > div:first-child dd {
+  color: var(--cor-lima);
+  font-size: clamp(2.5rem, 14vw, 5rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+#inicio > p:last-child {
+  max-width: 38rem;
+  margin-bottom: 0;
+  color: var(--cor-texto-secundario);
+  font-size: 0.875rem;
+}
+
+/* ========================================================================== 
+   4. Orientacao, cartoes e detalhes
+   ========================================================================== */
+
+#canais-oficiais {
+  background: var(--cor-lima);
+  color: #111307;
+}
+
+#canais-oficiais h2,
+#canais-oficiais a {
+  color: #111307;
+}
+
+#canais-oficiais p {
+  max-width: 48rem;
+  font-weight: 650;
+}
+
+#canais-oficiais ul {
+  display: grid;
+  gap: var(--espaco-2);
+  padding: 0;
+  list-style: none;
+}
+
+#canais-oficiais li a {
+  width: 100%;
+  border-color: #111307;
+}
+
+#canais-oficiais li a:hover {
+  background: #111307;
+  color: var(--cor-lima);
+}
+
+main > section[aria-labelledby="indicadores-titulo"] {
+  display: grid;
+  gap: var(--espaco-3);
+}
+
+#indicadores-titulo {
+  margin-bottom: var(--espaco-2);
+}
+
+article {
+  padding: var(--espaco-4);
+  border: 0.0625rem solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+}
+
+article > p:first-of-type {
+  color: var(--cor-texto-secundario);
+}
+
+article > p:first-of-type strong {
+  display: block;
+  color: var(--cor-agua);
+  font-size: clamp(2.5rem, 13vw, 4.75rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+article > dl {
+  margin: var(--espaco-5) 0;
+}
+
+article > dl > div {
+  display: grid;
+  gap: 0.15rem;
+  padding: var(--espaco-2) 0;
+  border-bottom: 0.0625rem solid var(--cor-borda);
+}
+
+article section {
+  margin: var(--espaco-4) 0;
+  padding: var(--espaco-3);
+  border-left: 0.25rem solid var(--cor-agua);
+  background: var(--cor-superficie-elevada);
+}
+
+article section p:last-child {
+  margin-bottom: 0;
+  color: var(--cor-texto-secundario);
+}
+
+details {
+  border-top: 0.0625rem solid var(--cor-borda);
+}
+
+details:last-child {
+  border-bottom: 0.0625rem solid var(--cor-borda);
+}
+
+summary {
+  padding: var(--espaco-3) 0;
+  color: var(--cor-texto);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+details[open] summary {
+  color: var(--cor-lima);
+}
+
+details > :not(summary) {
+  color: var(--cor-texto-secundario);
+}
+
+/* ========================================================================== 
+   5. Historico e tabela
+   ========================================================================== */
+
+#historico > p {
+  max-width: 48rem;
+  color: var(--cor-texto-secundario);
+}
+
+#historico > div {
+  display: flex;
+  gap: var(--espaco-1);
+  overflow-x: auto;
+  margin-bottom: var(--espaco-4);
+  padding-bottom: var(--espaco-1);
+}
+
+button {
+  min-height: 2.75rem;
+  padding: var(--espaco-2) var(--espaco-3);
+  border: 0.0625rem solid var(--cor-borda);
+  border-radius: 999rem;
+  background: transparent;
+  color: var(--cor-texto);
+  font: inherit;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+button:hover,
+button[aria-pressed="true"] {
+  border-color: var(--cor-agua);
+  background: var(--cor-agua);
+  color: #061013;
+}
+
+figure {
+  margin-right: 0;
+  margin-bottom: var(--espaco-4);
+  margin-left: 0;
+}
+
+#grafico-nivel {
+  display: grid;
+  min-height: 15rem;
+  place-items: center;
+  padding: var(--espaco-4);
+  border: 0.0625rem solid var(--cor-borda);
+  border-radius: var(--raio);
+  background:
+    linear-gradient(rgb(98 230 255 / 7%) 0.0625rem, transparent 0.0625rem),
+    linear-gradient(90deg, rgb(98 230 255 / 7%) 0.0625rem, transparent 0.0625rem),
+    var(--cor-superficie);
+  background-size: 2rem 2rem;
+  color: var(--cor-texto-secundario);
+  text-align: center;
+}
+
+#grafico-nivel p {
+  margin-bottom: 0;
+}
+
+figcaption {
+  margin-top: var(--espaco-2);
+  color: var(--cor-texto-secundario);
+  font-size: 0.8rem;
+}
+
+#historico details {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 38rem;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+caption {
+  padding: var(--espaco-3) 0;
+  color: var(--cor-texto);
+  font-weight: 800;
+  text-align: left;
+}
+
+th,
+td {
+  padding: var(--espaco-2);
+  border-bottom: 0.0625rem solid var(--cor-borda);
+  text-align: left;
+}
+
+th {
+  color: var(--cor-agua);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ========================================================================== 
+   6. Rodape
+   ========================================================================== */
+
+footer {
+  border-top: 0.0625rem solid var(--cor-borda);
+  background: var(--cor-superficie);
+}
+
+footer ul,
+footer p {
+  color: var(--cor-texto-secundario);
+}
+
+/* ========================================================================== 
+   7. Ampliacao progressiva
+   ========================================================================== */
+
+@media (min-width: 48rem) {
+  body > header {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: var(--espaco-3) var(--espaco-5);
+  }
+
+  body > header > p {
+    justify-self: end;
+  }
+
+  body > header > nav {
+    grid-column: 1;
+  }
+
+  body > header > a:last-child {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  main > section,
+  footer > div {
+    padding: 4.5rem var(--espaco-5);
+  }
+
+  #inicio > dl {
+    grid-template-columns: 1.1fr 1fr 1fr;
+  }
+
+  #inicio > dl > div {
+    padding-right: var(--espaco-4);
+  }
+
+  #inicio > dl > div + div {
+    padding-left: var(--espaco-4);
+    border-left: 0.0625rem solid var(--cor-borda);
+  }
+
+  #canais-oficiais ul {
+    grid-template-columns: repeat(2, max-content);
+  }
+
+  main > section[aria-labelledby="indicadores-titulo"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #indicadores-titulo {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 75rem) {
+  body > header,
+  main > section,
+  footer > div {
+    padding-right: max(var(--espaco-5), calc((100vw - var(--largura-conteudo)) / 2));
+    padding-left: max(var(--espaco-5), calc((100vw - var(--largura-conteudo)) / 2));
+  }
+
+  article {
+    padding: var(--espaco-5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
