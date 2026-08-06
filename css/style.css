@@ -28,7 +28,7 @@
   --espaco-6: 3rem;
   --raio: 0.75rem;
   --largura-conteudo: 75rem;
-}
+}   
 
 *,
 *::before,
@@ -171,6 +171,10 @@ nav a {
   font-size: 0.9rem;
   font-weight: 700;
   text-decoration: none;
+}
+
+nav a[href^="https://wa.me/"] {
+  color: var(--cor-lima);
 }
 
 body > header > a:last-child,
@@ -514,6 +518,10 @@ footer {
 footer ul,
 footer p {
   color: var(--cor-texto-secundario);
+}
+
+#participar-colaboracao {
+  color: var(--cor-lima);
 }
 
 /* ========================================================================== 
