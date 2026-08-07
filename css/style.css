@@ -15,6 +15,7 @@
   --cor-agua-forte: #00b8d9;
   --cor-lima: #d7ff45;
   --cor-aviso: #ffcf4a;
+  --cor-bloqueio: #ff5c5c;
   --cor-foco: #ffffff;
 
   --fonte-principal: Inter, ui-sans-serif, system-ui, -apple-system,
@@ -295,6 +296,45 @@ dd {
   font-size: 0.875rem;
 }
 
+#resumo-liberacao-usinas {
+  position: relative;
+  z-index: 1;
+  max-width: 48rem;
+  margin: var(--espaco-5) 0;
+  padding: var(--espaco-4);
+  border: 0.125rem solid var(--cor-agua);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+}
+
+#resumo-liberacao-usinas[data-estado="acima-da-referencia"] {
+  border-color: var(--cor-aviso);
+  background:
+    linear-gradient(rgb(255 207 74 / 12%), rgb(255 207 74 / 12%)),
+    var(--cor-superficie);
+}
+
+#resumo-liberacao-usinas h2 {
+  margin-bottom: var(--espaco-3);
+  font-size: clamp(1.4rem, 6vw, 2rem);
+  letter-spacing: -0.025em;
+}
+
+#situacao-liberacao-usinas {
+  margin-bottom: var(--espaco-2);
+  color: var(--cor-agua);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+#situacao-liberacao-usinas[data-estado="acima-da-referencia"] {
+  color: var(--cor-aviso);
+}
+
+#efeito-liberacao-usinas {
+  color: var(--cor-texto-secundario);
+}
+
 /* ========================================================================== 
    4. Orientacao, cartoes e detalhes
    ========================================================================== */
@@ -324,6 +364,8 @@ dd {
 #canais-oficiais li a {
   width: 100%;
   border-color: #111307;
+  background: transparent;
+  color: #111307;
 }
 
 #canais-oficiais li a:hover {
@@ -397,16 +439,211 @@ article section p:last-child {
   margin-top: var(--espaco-4);
 }
 
-.cartao-estacao .estacao-numero {
+#lista-observacoes-visuais {
+  display: grid;
+  gap: var(--espaco-4);
+  margin-top: var(--espaco-5);
+}
+
+#observacoes-visuais {
+  background:
+    linear-gradient(135deg, rgb(98 230 255 / 7%), transparent 48%),
+    var(--cor-fundo);
+}
+
+.selo-tipo-dado {
+  width: fit-content;
+  margin-bottom: var(--espaco-2);
+  padding: 0.35rem 0.7rem;
+  border: 0.0625rem solid currentcolor;
+  border-radius: 999rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.selo-observacao-visual {
+  color: var(--cor-agua);
+}
+
+.selo-dado-simulado {
+  color: var(--cor-aviso);
+}
+
+.cartao-observacao-visual {
+  border-left: 0.25rem solid var(--cor-agua);
+}
+
+.cartao-observacao-visual .nivel-visual-atual {
+  padding: var(--espaco-4);
+  border: 0.0625rem solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie-elevada);
+  font-size: 1.1rem;
+}
+
+.nivel-visual-atual[data-situacao="normal"] strong {
+  color: var(--cor-agua);
+}
+
+.nivel-visual-atual[data-situacao="atencao"] strong,
+.nivel-visual-atual[data-situacao="alerta"] strong {
+  color: var(--cor-aviso);
+}
+
+.nivel-visual-atual[data-situacao="inundacao"] strong {
+  color: var(--cor-bloqueio);
+}
+
+.nivel-visual-atual[data-situacao="indisponivel"] strong {
+  color: var(--cor-texto-secundario);
+}
+
+.cartao-observacao-visual h4 {
+  margin-top: var(--espaco-5);
+}
+
+.cartao-observacao-visual ol {
+  display: grid;
+  gap: var(--espaco-2);
+  padding-left: 1.5rem;
+}
+
+.cartao-observacao-visual ol li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2);
+  padding: var(--espaco-2);
+  border-bottom: 0.0625rem solid var(--cor-borda);
+}
+
+.situacao-travessia {
+  padding: 0.3rem 0.65rem;
+  border: 0.0625rem solid currentcolor;
+  border-radius: 999rem;
+  font-size: 0.78rem;
+}
+
+.situacao-travessia.transponivel {
+  color: var(--cor-lima);
+}
+
+.situacao-travessia.cuidado {
+  color: var(--cor-aviso);
+}
+
+.situacao-travessia.intransponivel {
+  color: var(--cor-bloqueio);
+}
+
+.situacao-travessia.indisponivel {
+  color: var(--cor-texto-secundario);
+}
+
+#usinas > p {
+  max-width: 48rem;
+  color: var(--cor-texto-secundario);
+}
+
+#lista-usinas {
+  display: grid;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-4);
+}
+
+.cartao-usina {
+  border-top: 0.25rem solid var(--cor-agua);
+}
+
+.cartao-usina .usina-ordem {
   margin-bottom: var(--espaco-2);
   color: var(--cor-lima);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cartao-usina .usina-tipo-dado,
+.cartao-usina .usina-atualizacao {
+  color: var(--cor-texto-secundario);
+  font-size: 0.8rem;
+}
+
+.cartao-usina dl {
+  margin: var(--espaco-4) 0;
+}
+
+.cartao-usina dl > div {
+  padding: var(--espaco-2) 0;
+  border-bottom: 0.0625rem solid var(--cor-borda);
+}
+
+.cartao-estacao .estacao-numero {
+  margin-bottom: var(--espaco-2);
+  color: var(--cor-texto-secundario);
   font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.cartao-estacao > dl {
+.cartao-estacao > h3 {
+  margin-bottom: var(--espaco-1);
+  color: var(--cor-lima);
+}
+
+.nivel-estacao {
+  display: grid;
+  gap: 0.2rem;
+  margin: var(--espaco-4) 0;
+  padding: var(--espaco-3);
+  border: 0.0625rem solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie-elevada);
+}
+
+.nivel-estacao > span,
+.nivel-estacao > small {
+  color: var(--cor-texto-secundario);
+}
+
+.nivel-estacao > span {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.nivel-estacao > strong {
+  color: var(--cor-agua);
+  font-size: clamp(2rem, 10vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.nivel-estacao[data-estado="acima-da-cota"] {
+  border-color: var(--cor-bloqueio);
+  background:
+    linear-gradient(rgb(255 92 92 / 14%), rgb(255 92 92 / 14%)),
+    var(--cor-superficie-elevada);
+}
+
+.nivel-estacao[data-estado="acima-da-cota"] > strong,
+.nivel-estacao[data-estado="acima-da-cota"] > small {
+  color: var(--cor-bloqueio);
+}
+
+.nivel-estacao[data-estado="indisponivel"] > strong {
+  color: var(--cor-texto-secundario);
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.cartao-estacao details dl {
   margin-bottom: 0;
 }
 
@@ -534,8 +771,107 @@ th {
   text-transform: uppercase;
 }
 
+/* ==========================================================================
+   6. Impacto nas estradas
+   ========================================================================== */
+
+#impacto-estradas {
+  background:
+    linear-gradient(135deg, rgb(255 207 74 / 8%), transparent 48%),
+    var(--cor-fundo);
+}
+
+#impacto-estradas .selo-provisorio {
+  width: fit-content;
+  margin-bottom: var(--espaco-4);
+  padding: 0.35rem 0.7rem;
+  border: 0.0625rem solid var(--cor-aviso);
+  border-radius: 999rem;
+  color: var(--cor-aviso);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#impacto-estradas .introducao-estradas {
+  max-width: 48rem;
+  color: var(--cor-texto-secundario);
+  font-size: 1.1rem;
+}
+
+.resumo-estradas {
+  display: grid;
+  gap: var(--espaco-3);
+  margin: var(--espaco-5) 0;
+}
+
+.resumo-estradas > div {
+  padding: var(--espaco-4);
+  border: 0.0625rem solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+}
+
+.resumo-estradas dd {
+  margin-top: var(--espaco-1);
+}
+
+.resumo-estradas .situacao-via {
+  border-color: var(--cor-agua);
+}
+
+.resumo-estradas .situacao-via[data-status="pequeno-porte"],
+.resumo-estradas .situacao-via[data-status="todos"] {
+  border-color: var(--cor-bloqueio);
+  border-width: 0.125rem;
+  background:
+    linear-gradient(rgb(255 92 92 / 14%), rgb(255 92 92 / 14%)),
+    var(--cor-superficie);
+  box-shadow: 0 0 0 0.1875rem rgb(255 92 92 / 10%);
+}
+
+.resumo-estradas .situacao-via[data-status="pequeno-porte"] dt,
+.resumo-estradas .situacao-via[data-status="todos"] dt {
+  color: var(--cor-bloqueio);
+}
+
+.situacao-via dd {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.situacao-via dd[data-status="sem-bloqueio"] {
+  color: var(--cor-agua);
+}
+
+.situacao-via dd[data-status="pequeno-porte"] {
+  color: var(--cor-bloqueio);
+}
+
+.situacao-via dd[data-status="todos"] {
+  color: var(--cor-bloqueio);
+}
+
+#impacto-estradas details {
+  max-width: 48rem;
+}
+
+#impacto-estradas .aviso-seguranca {
+  max-width: 48rem;
+  margin-top: var(--espaco-4);
+  margin-bottom: 0;
+  padding: var(--espaco-3);
+  border-left: 0.25rem solid var(--cor-aviso);
+  background: var(--cor-superficie-elevada);
+  color: var(--cor-texto-secundario);
+}
+
+#impacto-estradas .aviso-seguranca strong {
+  color: var(--cor-aviso);
+}
+
 /* ========================================================================== 
-   6. Rodape
+   7. Rodape
    ========================================================================== */
 
 footer {
@@ -553,7 +889,7 @@ footer p {
 }
 
 /* ========================================================================== 
-   7. Ampliacao progressiva
+   8. Ampliacao progressiva
    ========================================================================== */
 
 @media (min-width: 48rem) {
@@ -607,6 +943,18 @@ footer p {
   }
 
   #lista-estacoes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #lista-observacoes-visuais {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #lista-usinas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .resumo-estradas {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

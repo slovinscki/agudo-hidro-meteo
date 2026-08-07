@@ -42,6 +42,15 @@ deve ser registrada e apresentada ao usuário.
 RD-008 — Dados simulados, manuais ou de teste devem ser identificados de forma
 visível e não podem ser confundidos com medições reais.
 
+RD-008A — Pontos acompanhados visualmente devem ser apresentados separadamente
+das estações automáticas. Uma observação visual deve informar sua descrição,
+autor ou fonte e data e hora quando disponíveis, sem atribuir nível em metros,
+vazão ou classificação calculada que não tenham sido medidos.
+
+RD-008B — A interface deve identificar explicitamente três naturezas distintas:
+observação visual feita por pessoa, medição instrumental obtida por sensor e
+dado simulado usado no desenvolvimento.
+
 ======================================================================
 
 2. CAMPOS OBRIGATÓRIOS

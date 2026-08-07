@@ -1,7 +1,7 @@
 {
   "estacao": {
-    "id": "agudo-01",
-    "nome": "Estação de teste",
+    "id": "estacao-1",
+    "nome": "Dona Francisca",
     "fonte": "Dados simulados para desenvolvimento"
   },
   "medicao": {
@@ -12,5 +12,86 @@
     "unidadePrecipitacao": "mm",
     "medidoEm": "2026-08-07T14:30:00-03:00",  
     "status": "Provisório — dados de teste"
-  }
+  },
+  "usinas": [
+    {
+      "id": "usina-passo-real",
+      "ordem": 1,
+      "nome": "UHE Passo Real",
+      "tipo": "Dados fictícios para simulação",
+      "fonte": "Simulação do projeto",
+      "urlFonte": null,
+      "atualizadoEm": "2026-08-07T14:00:00-03:00",
+      "nivelReservatorio": 326.8,
+      "nivelJusante": 285.4,
+      "afluencia": 410.0,
+      "defluencia": 380.0,
+      "defluenciaReferenciaSimulada": 350.0,
+      "unidadeNivel": "m",
+      "unidadeVazao": "m³/s",
+      "limiteJusanteSimulado": null
+    },
+    {
+      "id": "usina-itauba",
+      "ordem": 2,
+      "nome": "UHE Itaúba",
+      "tipo": "Dados fictícios para simulação",
+      "fonte": "Simulação do projeto",
+      "urlFonte": null,
+      "atualizadoEm": "2026-08-07T14:00:00-03:00",
+      "nivelReservatorio": 196.4,
+      "nivelJusante": 132.8,
+      "afluencia": 650.0,
+      "defluencia": 620.0,
+      "defluenciaReferenciaSimulada": 600.0,
+      "unidadeNivel": "m",
+      "unidadeVazao": "m³/s",
+      "limiteJusanteSimulado": null
+    },
+    {
+      "id": "usina-dona-francisca",
+      "ordem": 3,
+      "nome": "UHE Dona Francisca",
+      "tipo": "Dados de referência para simulação",
+      "fonte": "DFESA — Status Hidrologia",
+      "urlFonte": "https://www.dfesa.com.br/status/",
+      "atualizadoEm": "2026-08-07T14:00:00-03:00",
+      "nivelReservatorio": 95.57,
+      "nivelJusante": 56.71,
+      "afluencia": 1233.0,
+      "defluencia": 1018.0,
+      "defluenciaReferenciaSimulada": 1100.0,
+      "unidadeNivel": "m",
+      "unidadeVazao": "m³/s",
+      "limiteJusanteSimulado": null
+    }
+  ],
+  "impactoEstradas": [
+    {
+      "id": "desvio-agudo-dona-francisca",
+      "via": "Desvio entre Agudo e Dona Francisca",
+      "estacaoReferencia": "estacao-1",
+      "tipoRegra": "bloqueio_por_porte",
+      "limitePequenoPorte": 7.0,
+      "limiteGrandePorte": 7.5,
+      "fonte": "Regras simuladas para desenvolvimento"
+    },
+    {
+      "id": "estrada-geral-nova-boemia",
+      "via": "Estrada Geral para Nova Boêmia",
+      "estacaoReferencia": "estacao-1",
+      "tipoRegra": "bloqueio_por_porte",
+      "limitePequenoPorte": 7.0,
+      "limiteGrandePorte": 7.5,
+      "fonte": "Regras simuladas para desenvolvimento"
+    },
+    {
+      "id": "acesso-captacao-corsan",
+      "via": "Acesso à captação da Corsan",
+      "estacaoReferencia": "estacao-1",
+      "tipoRegra": "bloqueio_total",
+      "limiteBloqueio": 5.5,
+      "fonte": "Regra simulada para desenvolvimento"
+    }
+  ]
 }

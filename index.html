@@ -34,7 +34,7 @@
           <li><a
                 href="https://wa.me/5555999932807?text=quero%20colaborar%20com%20o%20projeto"
                 target="_blank"
-                rel="noopener noreferrer">Colabore</a>
+                rel="noopener noreferrer">Seja um colaborador</a>
             </li>
         </ul>
       </nav>
@@ -49,8 +49,22 @@
 
         <h1 id="situacao-titulo">Situação atual</h1>
 
-        <p>Cota de referência ainda não validada.</p>
+        <p>ATENÇÃO: Cota de referência ainda não validada. Os dados são simulados</p>
         <p>O Rio Jacuí está subindo lentamente.</p>
+
+        <aside
+          id="resumo-liberacao-usinas"
+          aria-labelledby="liberacao-usinas-titulo"
+        >
+          <h2 id="liberacao-usinas-titulo">Liberação de água pelas usinas</h2>
+          <p id="situacao-liberacao-usinas" aria-live="polite">
+            Carregando...
+          </p>
+          <p id="efeito-liberacao-usinas">
+            Avaliando possível influência no nível do rio...
+          </p>
+          <a href="#usinas">Ver dados das usinas</a>
+        </aside>
 
         <dl>
           <div>
@@ -101,7 +115,7 @@
 
           <li>
             <a
-              href="https://alertas2.inmet.gov.br/"
+              href="https://portal.inmet.gov.br/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -248,11 +262,13 @@
       </section>
 
       <section id="estacoes" aria-labelledby="estacoes-titulo">
-        <h2 id="estacoes-titulo">Estações de monitoramento</h2>
+        <h2 id="estacoes-titulo">Medições automáticas</h2>
 
         <p>
-          Conheça os pontos que formam a rede de acompanhamento hidrológico e
-          meteorológico de Agudo.
+          Estações com sensores para acompanhamento hidrológico e
+          meteorológico. Nesta versão, os valores exibidos são
+          <strong>dados simulados</strong> para desenvolvimento, não leituras
+          instrumentais reais.
         </p>
 
         <div id="lista-estacoes" aria-live="polite">
@@ -262,6 +278,44 @@
         <noscript>
           <p>Ative o JavaScript para consultar a lista de estações.</p>
         </noscript>
+      </section>
+
+      <section
+        id="observacoes-visuais"
+        aria-labelledby="observacoes-visuais-titulo"
+      >
+        <p class="selo-tipo-dado selo-observacao-visual">
+          <strong>Observação visual</strong>
+        </p>
+        <h2 id="observacoes-visuais-titulo">Arroios observados visualmente</h2>
+        <p>
+          Acompanhamento feito por pessoas no local, sem sensor ou medição de
+          nível em metros. A situação geral pode ser normal, atenção, alerta ou
+          inundação. Uma descrição visual não substitui medição instrumental
+          nem constitui dado simulado.
+        </p>
+
+        <div id="lista-observacoes-visuais" aria-live="polite">
+          <p>Carregando pontos de observação visual...</p>
+        </div>
+
+        <noscript>
+          <p>Ative o JavaScript para consultar os pontos de observação visual.</p>
+        </noscript>
+      </section>
+
+      <section id="usinas" aria-labelledby="usinas-titulo">
+        <h2 id="usinas-titulo">Usinas no curso do Rio Jacuí</h2>
+
+        <p>
+          Dados organizados da usina mais acima para a mais abaixo no curso do
+          rio. Os valores simulados não representam condições operacionais
+          reais.
+        </p>
+
+        <div id="lista-usinas" aria-live="polite">
+          <p>Carregando dados das usinas...</p>
+        </div>
       </section>
 
       <section id="historico" aria-labelledby="historico-titulo">
@@ -357,6 +411,94 @@
 
         <p>Fonte: dados simulados para desenvolvimento.</p>
       </section>
+
+      <section
+        id="impacto-estradas"
+        aria-labelledby="impacto-estradas-titulo"
+      >
+        <p class="selo-provisorio"><strong>Informação provisória</strong></p>
+
+        <h2 id="impacto-estradas-titulo">
+          Influência do nível do rio nas estradas
+        </h2>
+
+        <p class="introducao-estradas">
+          A elevação do Rio Jacuí pode causar alagamentos e dificultar a
+          circulação em estradas localizadas nas áreas mais baixas.
+        </p>
+
+        <dl class="resumo-estradas">
+          <div>
+            <dt>Vias monitoradas</dt>
+            <dd>Três acessos com regras simuladas.</dd>
+          </div>
+
+          <div>
+            <dt>Nível na Estação 1</dt>
+            <dd id="nivel-estradas">Carregando...</dd>
+          </div>
+
+          <div>
+            <dt>Veículos de pequeno porte</dt>
+            <dd id="regra-pequeno-porte">Bloqueio simulado a partir de 7,00 m.</dd>
+          </div>
+
+          <div>
+            <dt>Veículos de grande porte</dt>
+            <dd id="regra-grande-porte">Bloqueio simulado acima de 7,50 m.</dd>
+          </div>
+
+          <div id="desvio-agudo-dona-francisca" class="situacao-via">
+            <dt>Desvio entre Agudo e Dona Francisca</dt>
+            <dd
+              id="situacao-desvio-agudo-dona-francisca"
+              aria-live="polite"
+            >
+              Carregando...
+            </dd>
+          </div>
+
+          <div id="estrada-geral-nova-boemia" class="situacao-via">
+            <dt>Estrada Geral para Nova Boêmia</dt>
+            <dd id="situacao-estrada-geral-nova-boemia">
+              Carregando...
+            </dd>
+          </div>
+
+          <div id="acesso-captacao-corsan" class="situacao-via">
+            <dt>Acesso à captação da Corsan</dt>
+            <dd id="situacao-acesso-captacao-corsan" aria-live="polite">
+              Carregando...
+            </dd>
+          </div>
+
+          <div>
+            <dt>Fonte</dt>
+            <dd id="fonte-regras-estradas">Carregando...</dd>
+          </div>
+        </dl>
+
+        <details>
+          <summary>Como o nível do rio pode afetar as estradas?</summary>
+
+          <p>
+            Estradas em áreas baixas podem ser atingidas antes de outras. O
+            impacto depende da localização, da elevação da via, da chuva
+            acumulada, da drenagem e das condições verificadas no local.
+          </p>
+
+          <p>
+            Neste protótipo, o resultado é calculado somente pelas regras
+            simuladas de nível. Ele não confirma as condições reais da via.
+            Fechamentos devem ser confirmados pelos órgãos responsáveis.
+          </p>
+        </details>
+
+        <p class="aviso-seguranca">
+          <strong>Orientação de segurança:</strong> antes de viajar, consulte
+          os canais oficiais e não atravesse trechos alagados.
+        </p>
+      </section>
     </main>
         <footer>
             <div>
@@ -399,6 +541,7 @@
                     hidrológicas e meteorológicas de Agudo, RS.
                 </p>
             </div>
+          </div>
         </footer>
   </body>
 </html>

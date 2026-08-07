@@ -14,6 +14,14 @@
       "vazao"
     ],
     "statusCadastro": "confirmada",
+    "tipoMonitoramento": "instrumental",
+    "naturezaDado": "simulado",
+    "medicaoSimulada": {
+      "nivelRio": 6.2,
+      "unidade": "m",
+      "cotaReferencia": 7.0,
+      "medidoEm": "2026-08-07T14:30:00-03:00"
+    },
     "observacoes": "Estação de referência para os dados hidrológicos da ANA."
   },
   {
@@ -32,6 +40,14 @@
     "codigoExterno": null,
     "variaveisEsperadas": [],
     "statusCadastro": "local_confirmado",
+    "tipoMonitoramento": "instrumental",
+    "naturezaDado": "simulado",
+    "medicaoSimulada": {
+      "nivelRio": 5.8,
+      "unidade": "m",
+      "cotaReferencia": 6.5,
+      "medidoEm": "2026-08-07T14:30:00-03:00"
+    },
     "observacoes": "Estação da Prefeitura Municipal de Agudo com hardware e software da Plugfield. Código da estação e sensores disponíveis ainda precisam ser confirmados."
   },
   {
@@ -50,6 +66,14 @@
     "codigoExterno": null,
     "variaveisEsperadas": [],
     "statusCadastro": "local_confirmado",
+    "tipoMonitoramento": "instrumental",
+    "naturezaDado": "simulado",
+    "medicaoSimulada": {
+      "nivelRio": 7.1,
+      "unidade": "m",
+      "cotaReferencia": 7.0,
+      "medidoEm": "2026-08-07T14:30:00-03:00"
+    },
     "observacoes": "Estação da Prefeitura Municipal de Agudo com hardware e software da Plugfield. Código da estação e sensores disponíveis ainda precisam ser confirmados."
   },
   {
@@ -68,6 +92,79 @@
     "codigoExterno": null,
     "variaveisEsperadas": [],
     "statusCadastro": "local_confirmado",
+    "tipoMonitoramento": "instrumental",
+    "naturezaDado": "indisponivel",
+    "medicaoSimulada": null,
     "observacoes": "Estação da Prefeitura Municipal de Agudo com hardware e software da Plugfield. Instalada na Escola Santo Antônio, em Pomeranos, sem posicionamento em rio. Código da estação e sensores ainda precisam ser confirmados."
+  },
+  {
+    "id": "arroio-corupa",
+    "ordem": 1,
+    "nome": "Arroio Corupá",
+    "local": null,
+    "tipo": "hidrologica",
+    "posicionadaEmRio": true,
+    "tipoMonitoramento": "visual",
+    "naturezaDado": "observacao_visual",
+    "fonte": "Observação visual comunitária",
+    "instituicaoResponsavel": null,
+    "codigoExterno": null,
+    "variaveisEsperadas": [
+      "aspecto_visual"
+    ],
+    "statusCadastro": "pendente",
+    "medicaoSimulada": null,
+    "observacaoVisual": null,
+    "regrasSituacaoVisual": {
+      "normal": "Água dentro do leito, sem aproximação das pontes.",
+      "atencao": "Água elevada no leito ou aproximando-se das estruturas das pontes.",
+      "alerta": "Água atingindo estruturas das pontes ou áreas próximas.",
+      "inundacao": "Água sobre ponte, via ou fora do leito."
+    },
+    "pontes": [
+      { "id": "corupa-ponte-1", "nome": "Ponte 1", "situacaoTravessia": "transponivel", "dadoSimulado": true },
+      { "id": "corupa-ponte-2", "nome": "Ponte 2", "situacaoTravessia": "cuidado", "dadoSimulado": true },
+      { "id": "corupa-ponte-3", "nome": "Ponte 3", "situacaoTravessia": "intransponivel", "dadoSimulado": true },
+      { "id": "corupa-ponte-4", "nome": "Ponte 4", "situacaoTravessia": "transponivel", "dadoSimulado": true },
+      { "id": "corupa-ponte-5", "nome": "Ponte 5", "situacaoTravessia": "cuidado", "dadoSimulado": true }
+    ],
+    "desaguaEm": "Rio Jacuí",
+    "infraestruturaAssociada": "Diversas pontes ao longo do arroio",
+    "observacoes": "Arroio acompanhado somente por observações visuais. Localização dos pontos de observação, responsável e primeira observação ainda precisam ser confirmados."
+  },
+  {
+    "id": "arroio-hermes",
+    "ordem": 2,
+    "nome": "Arroio Hérmes",
+    "local": null,
+    "tipo": "hidrologica",
+    "posicionadaEmRio": true,
+    "tipoMonitoramento": "visual",
+    "naturezaDado": "observacao_visual",
+    "fonte": "Observação visual comunitária",
+    "instituicaoResponsavel": null,
+    "codigoExterno": null,
+    "variaveisEsperadas": [
+      "aspecto_visual"
+    ],
+    "statusCadastro": "pendente",
+    "medicaoSimulada": null,
+    "observacaoVisual": null,
+    "regrasSituacaoVisual": {
+      "normal": "Água dentro do leito, sem aproximação das pontes.",
+      "atencao": "Água elevada no leito ou aproximando-se das estruturas das pontes.",
+      "alerta": "Água atingindo estruturas das pontes ou áreas próximas.",
+      "inundacao": "Água sobre ponte, via ou fora do leito."
+    },
+    "pontes": [
+      { "id": "hermes-ponte-1", "nome": "Ponte 1", "situacaoTravessia": "intransponivel", "dadoSimulado": true },
+      { "id": "hermes-ponte-2", "nome": "Ponte 2", "situacaoTravessia": "cuidado", "dadoSimulado": true },
+      { "id": "hermes-ponte-3", "nome": "Ponte 3", "situacaoTravessia": "transponivel", "dadoSimulado": true },
+      { "id": "hermes-ponte-4", "nome": "Ponte 4", "situacaoTravessia": "intransponivel", "dadoSimulado": true },
+      { "id": "hermes-ponte-5", "nome": "Ponte 5", "situacaoTravessia": "transponivel", "dadoSimulado": true }
+    ],
+    "desaguaEm": "Rio Jacuí",
+    "infraestruturaAssociada": "Diversas pontes ao longo do arroio",
+    "observacoes": "Arroio acompanhado somente por observações visuais. Localização dos pontos de observação, responsável e primeira observação ainda precisam ser confirmados."
   }
 ]
