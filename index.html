@@ -13,6 +13,7 @@
     <title>Plataforma Hidrometeorológica de Agudo, RS</title>
 
     <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js" defer></script>
   </head>
 
   <!--Início do projeto-->
@@ -54,21 +55,21 @@
         <dl>
           <div>
             <dt>Nível do rio</dt>
-            <dd>6,20 m</dd>
+            <dd id="resumo-nivel">Carregando...</dd>
           </div>
 
           <div>
             <dt>Última medição</dt>
             <dd>
-              <time datetime="2026-08-06T10:45:00-03:00">
-                6 de agosto de 2026, às 10h45
+              <time id="resumo-horario" datetime="">
+                Carregando...
               </time>
             </dd>
           </div>
 
           <div>
             <dt>Status</dt>
-            <dd>Provisório — dado atualizado</dd>
+            <dd id="resumo-status">Carregando...</dd>
           </div>
         </dl>
 
@@ -119,7 +120,7 @@
 
           <p>
             <strong>
-              <data value="6.20">6,20 m</data>
+              <data id="nivel-atual" value="">Carregando...</data>
             </strong>
           </p>
 
@@ -131,31 +132,31 @@
 
             <div>
               <dt>Estação</dt>
-              <dd>Estação de teste</dd>
+              <dd id="nome-estacao">Carregando...</dd>
             </div>
 
             <div>
               <dt>Tendência</dt>
-              <dd>Subindo lentamente</dd>
+              <dd id="tendencia-nivel">Carregando...</dd>
             </div>
 
             <div>
               <dt>Horário da medição</dt>
               <dd>
-                <time datetime="2026-08-06T10:45:00-03:00">
-                  6 de agosto de 2026, às 10h45
+                <time id="horario-nivel" datetime="">
+                  Carregando...
                 </time>
               </dd>
             </div>
 
             <div>
               <dt>Status</dt>
-              <dd>Provisório — dados de teste</dd>
+              <dd id="status-nivel">Carregando...</dd>
             </div>
 
             <div>
               <dt>Fonte</dt>
-              <dd>Dados simulados para desenvolvimento</dd>
+              <dd id="fonte-nivel">Carregando...</dd>
             </div>
           </dl>
 
@@ -179,7 +180,7 @@
 
           <p>
             <strong>
-              <data value="12.4">12,4 mm</data>
+              <data id="chuva-24h" value="">Carregando...</data>
             </strong>
             nas últimas 24 horas
           </p>
@@ -344,26 +345,37 @@
             <div id="sobre" aria-labelledby="responsaveis-titulo">
             <h2 id="responsaveis-titulo">Responsáveis pelo projeto</h2>
             <div id="sobre" aria-labelledby="responsaveis-titulo">
-               <a id="participar-colaboracao"
-                    href="https://wa.me/5555999932807?text=quero%20colaborar%20com%20o%20projeto"
-                    target="_blank"
-                    rel="noopener noreferrer">Fazer parte do grupo de colaboração</a>
+
                 <!--Responsáveis pelo projeto-->
                 <ul>
-                    <li>Rafael Slovinscki | Função: Desenvolvedor |<a
+                    <li>Rafael Slovinscki | Desenvolvedor |
+                      <a
                         href="https://github.com/slovinscki"
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="GitHub de Rafael Slovinscki"> GitHub </a>|<a
+                        aria-label="GitHub de Rafael Slovinscki"> GitHub
+                      </a> |
+                      <a
                         href="https://www.linkedin.com/in/rsmktdigital/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="LinkedIn de Rafael Slovinscki"> LinkedIn </a>
+                        aria-label="LinkedIn de Rafael Slovinscki"> LinkedIn
+                      </a>
                     </li>
                     
-                    <li>Nome do responsável 2</li>
+                    <li>Kauã Souza | Desenvolvedor | <a
+                      href="https://www.linkedin.com/in/kau%C3%A3-souza-79a0551a5/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="LinkedIn de Kaua Souza"> LinkedIn </a>
+
+                    </li>
                     <li>Nome do responsável 3</li>
                 </ul>
+                <a id="participar-colaboracao"
+                    href="https://wa.me/5555999932807?text=quero%20colaborar%20com%20o%20projeto"
+                    target="_blank"
+                    rel="noopener noreferrer">Fazer parte do grupo de colaboração</a>
 
                 <p>
                     Projeto desenvolvido para divulgação de informações

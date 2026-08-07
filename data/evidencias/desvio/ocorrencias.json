@@ -1,0 +1,30 @@
+[
+  {
+    "id": "desvio-2026-07-28-2055",
+    "localId": "desvio",
+    "localNome": "Desvio",
+    "nomeUsadoNaFonte": "Sangrador",
+    "dataHoraOcorrencia": null,
+    "dataHoraPublicacao": "2026-07-28T20:55:00-03:00",
+    "precisaoHorario": "horario_da_publicacao",
+    "situacao": "bloqueio_confirmado",
+    "descricao": "Rio Jacuí sobre o sangrador e trânsito interrompido.",
+    "veiculosAfetados": [
+      "leves",
+      "pesados"
+    ],
+    "fonte": {
+      "autor": "Enagio Mattje",
+      "instituicao": null,
+      "tipo": "video_facebook",
+      "url": "https://www.facebook.com/share/r/18GCNyqGkh/"
+    },
+    "estacaoReferencia": "85400000",
+    "nivelRioMetros": null,
+    "statusValidacao": "pendente_cruzamento_hidrologico",
+    "observacoes": [
+      "Confirmar se 20h55 corresponde à publicação ou à gravação.",
+      "Confirmar no áudio a referência aos tipos de veículos."
+    ]
+  }
+]

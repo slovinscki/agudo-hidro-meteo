@@ -1,0 +1,65 @@
+[
+  {
+    "id": "porto-agudo-2026-07-29-0640",
+    "localId": "porto-agudo",
+    "localNome": "Porto Agudo",
+    "nomeUsadoNaFonte": "Porto Agudo",
+    "dataHoraOcorrencia": "2026-07-29T06:40:00-03:00",
+    "dataHoraPublicacao": null,
+    "precisaoHorario": "informado_na_publicacao",
+    "situacao": "passagem_confirmada",
+    "descricao": "Água do Rio Jacuí chegando à estrada, mas ainda havia passagem.",
+    "fonte": {
+      "autor": "Enagio Mattje",
+      "instituicao": null,
+      "tipo": "publicacao_facebook",
+      "url": "https://www.facebook.com/enagio.mattje.2025/posts/122155270328414369"
+    },
+    "estacaoReferencia": "85400000",
+    "nivelRioMetros": null,
+    "statusValidacao": "pendente_cruzamento_hidrologico",
+    "observacoes": []
+  },
+  {
+    "id": "porto-agudo-2026-07-29-0830",
+    "localId": "porto-agudo",
+    "localNome": "Porto Agudo",
+    "nomeUsadoNaFonte": "Porto Agudo",
+    "dataHoraOcorrencia": "2026-07-29T08:30:00-03:00",
+    "dataHoraPublicacao": null,
+    "precisaoHorario": "informado_na_publicacao",
+    "situacao": "agua_sobre_a_via",
+    "descricao": "Rio Jacuí sobre a estrada.",
+    "fonte": {
+      "autor": "Enagio Mattje",
+      "instituicao": null,
+      "tipo": "publicacao_facebook",
+      "url": "https://www.facebook.com/enagio.mattje.2025/posts/122155274996414369"
+    },
+    "estacaoReferencia": "85400000",
+    "nivelRioMetros": null,
+    "statusValidacao": "pendente_cruzamento_hidrologico",
+    "observacoes": []
+  },
+  {
+    "id": "porto-agudo-2026-07-29-1247",
+    "localId": "porto-agudo",
+    "localNome": "Porto Agudo",
+    "nomeUsadoNaFonte": "Porto Agudo",
+    "dataHoraOcorrencia": "2026-07-29T12:47:00-03:00",
+    "dataHoraPublicacao": null,
+    "precisaoHorario": "informado_na_publicacao",
+    "situacao": "bloqueio_confirmado",
+    "descricao": "Porto Agudo interditado, com rota opcional pela Linha Teotônia.",
+    "fonte": {
+      "autor": "Enagio Mattje",
+      "instituicao": null,
+      "tipo": "publicacao_facebook",
+      "url": "https://www.facebook.com/enagio.mattje.2025/posts/122155283714414369"
+    },
+    "estacaoReferencia": "85400000",
+    "nivelRioMetros": null,
+    "statusValidacao": "pendente_cruzamento_hidrologico",
+    "observacoes": []
+  }
+]

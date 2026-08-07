@@ -1,0 +1,16 @@
+{
+  "estacao": {
+    "id": "agudo-01",
+    "nome": "Estação de teste",
+    "fonte": "Dados simulados para desenvolvimento"
+  },
+  "medicao": {
+    "nivelRio": 6.2,
+    "unidadeNivel": "m",
+    "tendencia": "Subindo lentamente",
+    "precipitacao24h": 12.4,
+    "unidadePrecipitacao": "mm",
+    "medidoEm": "2026-08-07T14:30:00-03:00",  
+    "status": "Provisório — dados de teste"
+  }
+}
