@@ -1,0 +1,73 @@
+[
+  {
+    "id": "estacao-1",
+    "ordem": 1,
+    "nome": "Dona Francisca",
+    "local": "Ponte entre Agudo e Dona Francisca",
+    "tipo": "hidrologica",
+    "posicionadaEmRio": true,
+    "fonte": "ANA",
+    "codigoExterno": "85400000",
+    "variaveisEsperadas": [
+      "nivel_do_rio",
+      "precipitacao",
+      "vazao"
+    ],
+    "statusCadastro": "confirmada",
+    "observacoes": "Estação de referência para os dados hidrológicos da ANA."
+  },
+  {
+    "id": "estacao-2",
+    "ordem": 2,
+    "nome": "Porto Agudo",
+    "local": "Porto Agudo",
+    "tipo": "meteorologica",
+    "posicionadaEmRio": true,
+    "fonte": "Plugfield",
+    "instituicaoResponsavel": "Prefeitura Municipal de Agudo",
+    "proprietario": "Prefeitura Municipal de Agudo",
+    "fabricanteHardware": "Plugfield",
+    "provedorSoftware": "Plugfield",
+    "fonteTecnicaDados": "Plugfield",
+    "codigoExterno": null,
+    "variaveisEsperadas": [],
+    "statusCadastro": "local_confirmado",
+    "observacoes": "Estação da Prefeitura Municipal de Agudo com hardware e software da Plugfield. Código da estação e sensores disponíveis ainda precisam ser confirmados."
+  },
+  {
+    "id": "estacao-3",
+    "ordem": 3,
+    "nome": "Porto Alves",
+    "local": "Porto Alves",
+    "tipo": "meteorologica",
+    "posicionadaEmRio": true,
+    "fonte": "Plugfield",
+    "instituicaoResponsavel": "Prefeitura Municipal de Agudo",
+    "proprietario": "Prefeitura Municipal de Agudo",
+    "fabricanteHardware": "Plugfield",
+    "provedorSoftware": "Plugfield",
+    "fonteTecnicaDados": "Plugfield",
+    "codigoExterno": null,
+    "variaveisEsperadas": [],
+    "statusCadastro": "local_confirmado",
+    "observacoes": "Estação da Prefeitura Municipal de Agudo com hardware e software da Plugfield. Código da estação e sensores disponíveis ainda precisam ser confirmados."
+  },
+  {
+    "id": "estacao-4",
+    "ordem": 4,
+    "nome": "Pomeranos — Escola Santo Antônio",
+    "local": "Escola Santo Antônio, Pomeranos, Agudo/RS",
+    "tipo": "meteorologica",
+    "posicionadaEmRio": false,
+    "fonte": "Plugfield",
+    "instituicaoResponsavel": "Prefeitura Municipal de Agudo",
+    "proprietario": "Prefeitura Municipal de Agudo",
+    "fabricanteHardware": "Plugfield",
+    "provedorSoftware": "Plugfield",
+    "fonteTecnicaDados": "Plugfield",
+    "codigoExterno": null,
+    "variaveisEsperadas": [],
+    "statusCadastro": "local_confirmado",
+    "observacoes": "Estação da Prefeitura Municipal de Agudo com hardware e software da Plugfield. Instalada na Escola Santo Antônio, em Pomeranos, sem posicionamento em rio. Código da estação e sensores ainda precisam ser confirmados."
+  }
+]

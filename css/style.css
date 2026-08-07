@@ -1,4 +1,4 @@
-/* ========================================================================== 
+/* ==========================================================================
    1. Fundacao visual — mobile first
    ========================================================================== */
 
@@ -382,6 +382,34 @@ article section p:last-child {
   color: var(--cor-texto-secundario);
 }
 
+/* ==========================================================================
+   Estações de monitoramento
+   ========================================================================== */
+
+#estacoes > p {
+  max-width: 48rem;
+  color: var(--cor-texto-secundario);
+}
+
+#lista-estacoes {
+  display: grid;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-4);
+}
+
+.cartao-estacao .estacao-numero {
+  margin-bottom: var(--espaco-2);
+  color: var(--cor-lima);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cartao-estacao > dl {
+  margin-bottom: 0;
+}
+
 details {
   border-top: 0.0625rem solid var(--cor-borda);
 }
@@ -576,6 +604,10 @@ footer p {
 
   #indicadores-titulo {
     grid-column: 1 / -1;
+  }
+
+  #lista-estacoes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
