@@ -1,5 +1,6 @@
 const CAMINHO_DADOS = "data/dados.json";
 const CAMINHO_ESTACOES = "data/estacoes.json";
+const CAMINHO_ANA = "/api/ana";
 
 function formatarNumero(valor) {
   return valor.toLocaleString("pt-BR", {
@@ -186,31 +187,41 @@ function exibirResumoLiberacaoUsinas(usinas) {
   resumo.dataset.estado = "acima-da-referencia";
 }
 
-function exibirDados(dados) {
+function exibirDados(dados, dadosAna = null) {
   const { estacao, medicao, impactoEstradas, usinas } = dados;
-  const nivelFormatado = `${formatarNumero(medicao.nivelRio)} ${medicao.unidadeNivel}`;
+  const nivel = dadosAna?.medicao?.nivelRio?.valor ?? medicao.nivelRio;
+  const unidadeNivel =
+    dadosAna?.medicao?.nivelRio?.unidade ?? medicao.unidadeNivel;
+  const medidoEm = dadosAna?.medicao?.medidoEm ?? medicao.medidoEm;
+  const nomeEstacao = dadosAna?.estacao?.nome ?? estacao.nome;
+  const fonteNivel = dadosAna?.fonte ?? estacao.fonte;
+  const statusNivel = dadosAna
+    ? `Dado instrumental — qualidade: ${dadosAna.medicao.nivelRio.qualidade}`
+    : medicao.status;
+  const tendencia = dadosAna ? "Ainda não calculada" : medicao.tendencia;
+  const nivelFormatado = `${formatarNumero(nivel)} ${unidadeNivel}`;
   const chuvaFormatada = `${formatarNumero(medicao.precipitacao24h)} ${medicao.unidadePrecipitacao}`;
-  const horarioFormatado = formatarData(medicao.medidoEm);
+  const horarioFormatado = formatarData(medidoEm);
 
   atualizarTexto("resumo-nivel", nivelFormatado);
   atualizarTexto("resumo-horario", horarioFormatado);
-  atualizarTexto("resumo-status", medicao.status);
+  atualizarTexto("resumo-status", statusNivel);
   atualizarTexto("nivel-atual", nivelFormatado);
-  atualizarTexto("nome-estacao", estacao.nome);
-  atualizarTexto("tendencia-nivel", medicao.tendencia);
+  atualizarTexto("nome-estacao", nomeEstacao);
+  atualizarTexto("tendencia-nivel", tendencia);
   atualizarTexto("horario-nivel", horarioFormatado);
-  atualizarTexto("status-nivel", medicao.status);
-  atualizarTexto("fonte-nivel", estacao.fonte);
+  atualizarTexto("status-nivel", statusNivel);
+  atualizarTexto("fonte-nivel", fonteNivel);
   atualizarTexto("chuva-24h", chuvaFormatada);
 
-  document.querySelector("#nivel-atual").value = medicao.nivelRio;
+  document.querySelector("#nivel-atual").value = nivel;
   document.querySelector("#chuva-24h").value = medicao.precipitacao24h;
-  document.querySelector("#resumo-horario").dateTime = medicao.medidoEm;
-  document.querySelector("#horario-nivel").dateTime = medicao.medidoEm;
+  document.querySelector("#resumo-horario").dateTime = medidoEm;
+  document.querySelector("#horario-nivel").dateTime = medidoEm;
 
   exibirImpactoEstradas(
-    medicao.nivelRio,
-    medicao.unidadeNivel,
+    nivel,
+    unidadeNivel,
     impactoEstradas,
   );
   exibirUsinas(usinas);
@@ -274,11 +285,14 @@ function criarNivelEstacao(estacao) {
   const rotulo = document.createElement("span");
   const valor = document.createElement("strong");
   const contexto = document.createElement("small");
-  const medicao = estacao.medicaoSimulada;
+  const medicaoReal = estacao.medicaoAtual;
+  const medicao = medicaoReal ?? estacao.medicaoSimulada;
 
   bloco.className = "nivel-estacao";
-  rotulo.textContent = medicao
-    ? "Dado simulado de nível"
+  rotulo.textContent = medicaoReal
+    ? "Nível instrumental da ANA"
+    : medicao
+      ? "Dado simulado de nível"
     : "Medição instrumental";
 
   if (!medicao) {
@@ -288,13 +302,21 @@ function criarNivelEstacao(estacao) {
       : "Esta estação não está posicionada em rio";
     bloco.dataset.estado = "indisponivel";
   } else {
-    const acimaDaCota = medicao.nivelRio > medicao.cotaReferencia;
+    const acimaDaCota =
+      typeof medicao.cotaReferencia === "number" &&
+      medicao.nivelRio > medicao.cotaReferencia;
 
     valor.textContent = `${formatarNumero(medicao.nivelRio)} ${medicao.unidade}`;
-    contexto.textContent = acimaDaCota
+    contexto.textContent = medicaoReal
+      ? `Medido em ${formatarData(medicao.medidoEm)} — qualidade: ${medicao.qualidade}`
+      : acimaDaCota
       ? `Acima da cota simulada de ${formatarNumero(medicao.cotaReferencia)} ${medicao.unidade}`
       : `Cota simulada: ${formatarNumero(medicao.cotaReferencia)} ${medicao.unidade}`;
-    bloco.dataset.estado = acimaDaCota ? "acima-da-cota" : "abaixo-da-cota";
+    bloco.dataset.estado = medicaoReal
+      ? "instrumental"
+      : acimaDaCota
+        ? "acima-da-cota"
+        : "abaixo-da-cota";
   }
 
   bloco.append(rotulo, valor, contexto);
@@ -411,8 +433,10 @@ function criarCartaoEstacao(estacao) {
   numero.textContent = `Estação ${estacao.ordem}`;
   titulo.textContent = estacao.nome;
   natureza.className = "selo-tipo-dado selo-dado-simulado";
-  natureza.textContent = estacao.medicaoSimulada
-    ? "Dado simulado — não é leitura instrumental real"
+  natureza.textContent = estacao.medicaoAtual
+    ? "Dado instrumental da ANA"
+    : estacao.medicaoSimulada
+      ? "Dado simulado — não é leitura instrumental real"
     : "Medição instrumental — sem dado disponível";
   resumo.textContent = "Ver dados da estação";
 
@@ -459,19 +483,59 @@ function criarCartaoEstacao(estacao) {
     );
   }
 
+  if (estacao.medicaoAtual) {
+    detalhes.append(
+      criarItemDetalhe(
+        "Precipitação na medição",
+        formatarMedida(
+          estacao.medicaoAtual.precipitacao,
+          estacao.medicaoAtual.unidadePrecipitacao,
+        ),
+      ),
+      criarItemDetalhe(
+        "Vazão",
+        formatarMedida(
+          estacao.medicaoAtual.vazao,
+          estacao.medicaoAtual.unidadeVazao,
+        ),
+      ),
+    );
+  }
+
   expansivel.append(resumo, detalhes);
   cartao.append(titulo, numero, natureza, nivel, expansivel);
 
   return cartao;
 }
 
-function exibirEstacoes(estacoes) {
+function exibirEstacoes(estacoes, dadosAna = null) {
   const lista = document.querySelector("#lista-estacoes");
   const listaVisuais = document.querySelector("#lista-observacoes-visuais");
-  const instrumentais = estacoes.filter(
+  const estacoesAtualizadas = estacoes.map((estacao) => {
+    if (estacao.id !== "estacao-1" || !dadosAna) {
+      return estacao;
+    }
+
+    return {
+      ...estacao,
+      naturezaDado: "instrumental",
+      medicaoSimulada: null,
+      medicaoAtual: {
+        nivelRio: dadosAna.medicao.nivelRio.valor,
+        unidade: dadosAna.medicao.nivelRio.unidade,
+        qualidade: dadosAna.medicao.nivelRio.qualidade,
+        medidoEm: dadosAna.medicao.medidoEm,
+        precipitacao: dadosAna.medicao.precipitacao.valor,
+        unidadePrecipitacao: dadosAna.medicao.precipitacao.unidade,
+        vazao: dadosAna.medicao.vazao.valor,
+        unidadeVazao: dadosAna.medicao.vazao.unidade,
+      },
+    };
+  });
+  const instrumentais = estacoesAtualizadas.filter(
     (estacao) => estacao.tipoMonitoramento !== "visual",
   );
-  const visuais = estacoes.filter(
+  const visuais = estacoesAtualizadas.filter(
     (estacao) => estacao.tipoMonitoramento === "visual",
   );
 
@@ -479,7 +543,7 @@ function exibirEstacoes(estacoes) {
   listaVisuais.replaceChildren(...visuais.map(criarCartaoObservacaoVisual));
 }
 
-async function carregarEstacoes() {
+async function carregarEstacoes(dadosAna = null) {
   const lista = document.querySelector("#lista-estacoes");
 
   try {
@@ -490,7 +554,7 @@ async function carregarEstacoes() {
     }
 
     const estacoes = await resposta.json();
-    exibirEstacoes(estacoes);
+    exibirEstacoes(estacoes, dadosAna);
   } catch (erro) {
     console.error("Não foi possível carregar as estações:", erro);
     lista.innerHTML = "<p>Estações indisponíveis no momento.</p>";
@@ -504,14 +568,19 @@ async function carregarEstacoes() {
 
 async function carregarDados() {
   try {
-    const resposta = await fetch(CAMINHO_DADOS);
+    const [resposta, respostaAna] = await Promise.all([
+      fetch(CAMINHO_DADOS),
+      fetch(CAMINHO_ANA).catch(() => null),
+    ]);
 
     if (!resposta.ok) {
       throw new Error(`Erro HTTP: ${resposta.status}`);
     }
 
     const dados = await resposta.json();
-    exibirDados(dados);
+    const dadosAna = respostaAna?.ok ? await respostaAna.json() : null;
+    exibirDados(dados, dadosAna);
+    await carregarEstacoes(dadosAna);
   } catch (erro) {
     console.error("Não foi possível carregar os dados:", erro);
     exibirErro();
@@ -519,4 +588,3 @@ async function carregarDados() {
 }
 
 carregarDados();
-carregarEstacoes();
