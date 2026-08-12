@@ -12,6 +12,12 @@
 
     <title>Plataforma Hidrometeorológica de Agudo, RS</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/script.js" defer></script>
   </head>
@@ -26,21 +32,14 @@
 
       <nav aria-label="Navegação principal">
         <ul>
-          <li><a href="#inicio">Início</a></li>
-          <li><a href="#historico">Histórico</a></li>
-          <li><a href="#estacoes">Estações</a></li>
-          <li><a href="#metodologia">Metodologia</a></li>
-          <li><a href="#sobre">Sobre</a></li>
           <li><a
                 href="https://wa.me/5555999932807?text=quero%20colaborar%20com%20o%20projeto"
                 target="_blank"
                 rel="noopener noreferrer">Seja um colaborador</a>
             </li>
+          <li><a href="#canais-oficiais">Defesa Civil — canais oficiais</a></li>
         </ul>
       </nav>
-
-      <a href="#canais-oficiais">Canais oficiais</a>
-
     </header>
 
     <main id="conteudo-principal">
@@ -55,23 +54,12 @@
           podem ser simulados e são identificados na página.
         </p>
 
-        <aside
-          id="resumo-liberacao-usinas"
-          aria-labelledby="liberacao-usinas-titulo"
-        >
-          <h2 id="liberacao-usinas-titulo">Liberação de água pelas usinas</h2>
-          <p id="situacao-liberacao-usinas" aria-live="polite">
-            Carregando...
-          </p>
-          <p id="efeito-liberacao-usinas">
-            Avaliando possível influência no nível do rio...
-          </p>
-          <a href="#usinas">Ver dados das usinas</a>
-        </aside>
-
         <dl>
           <div>
-            <dt>Nível do rio</dt>
+            <dt class="resumo-nivel-cabecalho">
+              <span>Nível do rio</span>
+              <span class="resumo-nivel-estacao">Estação Ponte Dona Franscisa</span>
+            </dt>
             <dd id="resumo-nivel">Carregando...</dd>
           </div>
 
@@ -90,13 +78,27 @@
           </div>
         </dl>
 
+        <aside
+          id="resumo-liberacao-usinas"
+          aria-labelledby="liberacao-usinas-titulo"
+        >
+          <h2 id="liberacao-usinas-titulo">Liberação de água pelas usinas</h2>
+          <p id="situacao-liberacao-usinas" aria-live="polite">
+            Carregando...
+          </p>
+          <p id="efeito-liberacao-usinas">
+            Avaliando possível influência no nível do rio...
+          </p>
+          <a href="#usinas">Ver dados das usinas</a>
+        </aside>
+
         <p>A tendência automática ainda não é calculada com os dados da ANA.</p>
       </section>
 
       <!-- orientação e canais oficiais-->
 
       <section id="canais-oficiais" aria-labelledby="canais-titulo">
-        <h2 id="canais-titulo">Orientação oficial</h2>
+        <h2 id="canais-titulo">Canais oficiais da Defesa Civil</h2>
 
         <p>
           Esta plataforma possui caráter informativo e não constitui um canal
@@ -125,143 +127,95 @@
               Avisos meteorológicos do INMET
             </a>
           </li>
+
+          <li>
+            <a
+              href="https://chat.whatsapp.com/EB6cO6rJeRsGFBKsZZWGO1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp Defesa Civil de Agudo
+            </a>
+          </li>
         </ul>
       </section>
 
-      <!--cartões de indicadores-->
-      <section aria-labelledby="indicadores-titulo">
-        <h2 id="indicadores-titulo">Condições observadas</h2>
+      <section
+        id="impacto-estradas"
+        aria-labelledby="impacto-estradas-titulo"
+      >
+        <p class="selo-provisorio"><strong>Informação provisória</strong></p>
 
-        <article aria-labelledby="nivel-titulo">
-          <h3 id="nivel-titulo">Nível do rio</h3>
+        <h2 id="impacto-estradas-titulo">
+          Influência do nível do rio nas estradas
+        </h2>
 
-          <p>
-            <strong>
-              <data id="nivel-atual" value="">Carregando...</data>
-            </strong>
-          </p>
+        <p class="introducao-estradas">
+          A elevação do Rio Jacuí pode causar alagamentos e dificultar a
+          circulação em estradas localizadas nas áreas mais baixas.
+        </p>
 
-          <dl>
-            <div>
-              <dt>Rio</dt>
-              <dd>Rio Jacuí</dd>
-            </div>
+        <dl class="resumo-estradas">
+          <div id="desvio-agudo-dona-francisca" class="situacao-via">
+            <dt>Desvio entre Agudo e Dona Francisca</dt>
+            <dd
+              id="situacao-desvio-agudo-dona-francisca"
+              aria-live="polite"
+            >
+              Carregando...
+            </dd>
+          </div>
 
-            <div>
-              <dt>Estação</dt>
-              <dd id="nome-estacao">Carregando...</dd>
-            </div>
+          <div id="estrada-geral-nova-boemia" class="situacao-via">
+            <dt>Estrada Geral para Nova Boêmia</dt>
+            <dd id="situacao-estrada-geral-nova-boemia">
+              Carregando...
+            </dd>
+          </div>
 
-            <div>
-              <dt>Tendência</dt>
-              <dd id="tendencia-nivel">Carregando...</dd>
-            </div>
+          <div id="acesso-captacao-corsan" class="situacao-via">
+            <dt>Acesso à captação da Corsan</dt>
+            <dd id="situacao-acesso-captacao-corsan" aria-live="polite">
+              Carregando...
+            </dd>
+          </div>
 
-            <div>
-              <dt>Horário da medição</dt>
-              <dd>
-                <time id="horario-nivel" datetime="">
-                  Carregando...
-                </time>
-              </dd>
-            </div>
+          <div>
+            <dt>Veículos de pequeno porte</dt>
+            <dd id="regra-pequeno-porte">Bloqueio simulado a partir de 7,00 m.</dd>
+          </div>
 
-            <div>
-              <dt>Status</dt>
-              <dd id="status-nivel">Carregando...</dd>
-            </div>
+          <div>
+            <dt>Veículos de grande porte</dt>
+            <dd id="regra-grande-porte">Bloqueio simulado acima de 7,50 m.</dd>
+          </div>
 
-            <div>
-              <dt>Fonte</dt>
-              <dd id="fonte-nivel">Carregando...</dd>
-            </div>
-          </dl>
+          <div>
+            <dt>Fonte</dt>
+            <dd id="fonte-regras-estradas">Carregando...</dd>
+          </div>
+        </dl>
 
-          <details>
-            <summary>Como interpretar</summary>
-
-            <p>
-              O nível indica a altura da água medida na estação. Ele deve ser
-              interpretado em relação às cotas de referência validadas para esse
-              local.
-            </p>
-
-            <p>
-              Um rio subindo não significa necessariamente que haverá inundação.
-              A tendência informa apenas a variação recente do nível.
-            </p>
-          </details>
-        </article>
-        <article aria-labelledby="chuva-titulo">
-          <h3 id="chuva-titulo">Chuva observada</h3>
+        <details>
+          <summary>Como o nível do rio pode afetar as estradas?</summary>
 
           <p>
-            <strong>
-              <data id="chuva-24h" value="">Carregando...</data>
-            </strong>
-            nas últimas 24 horas
+            Estradas em áreas baixas podem ser atingidas antes de outras. O
+            impacto depende da localização, da elevação da via, da chuva
+            acumulada, da drenagem e das condições verificadas no local.
           </p>
 
-          <dl>
-            <div>
-              <dt>Início do período</dt>
-              <dd>
-                <time datetime="2026-08-05T10:45:00-03:00">
-                  5 de agosto de 2026, às 10h45
-                </time>
-              </dd>
-            </div>
+          <p>
+            Neste protótipo, o resultado é calculado somente pelas regras
+            simuladas de nível. Ele não confirma as condições reais da via.
+            Fechamentos devem ser confirmados pelos órgãos responsáveis.
+          </p>
+        </details>
 
-            <div>
-              <dt>Fim do período</dt>
-              <dd>
-                <time datetime="2026-08-06T10:45:00-03:00">
-                  6 de agosto de 2026, às 10h45
-                </time>
-              </dd>
-            </div>
-
-            <div>
-              <dt>Status</dt>
-              <dd>Provisório — dados de teste</dd>
-            </div>
-
-            <div>
-              <dt>Fonte</dt>
-              <dd>Dados simulados para desenvolvimento</dd>
-            </div>
-          </dl>
-
-          <section aria-labelledby="previsao-titulo">
-            <h4 id="previsao-titulo">Previsão meteorológica</h4>
-
-            <p>
-              Previsão simulada: possibilidade de chuva nas próximas 24 horas.
-            </p>
-
-            <p>A previsão representa uma estimativa e não uma medição.</p>
-          </section>
-
-          <details>
-            <summary>Ver outros períodos</summary>
-
-            <ul>
-              <li>Última hora: 0,0 mm</li>
-              <li>Últimas 6 horas: 3,2 mm</li>
-              <li>Últimas 24 horas: 12,4 mm</li>
-              <li>Últimos 7 dias: dados indisponíveis</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>Fonte e modelo</summary>
-
-            <p>
-              Os valores deste protótipo são simulados e não utilizam ainda uma
-              estação ou modelo meteorológico real.
-            </p>
-          </details>
-        </article>
+        <p class="aviso-seguranca">
+          <strong>Orientação de segurança:</strong> antes de viajar, consulte
+          os canais oficiais e não atravesse trechos alagados.
+        </p>
       </section>
 
       <section id="estacoes" aria-labelledby="estacoes-titulo">
@@ -415,93 +369,120 @@
         <p>Fonte: dados simulados para desenvolvimento.</p>
       </section>
 
-      <section
-        id="impacto-estradas"
-        aria-labelledby="impacto-estradas-titulo"
-      >
-        <p class="selo-provisorio"><strong>Informação provisória</strong></p>
-
-        <h2 id="impacto-estradas-titulo">
-          Influência do nível do rio nas estradas
-        </h2>
-
-        <p class="introducao-estradas">
-          A elevação do Rio Jacuí pode causar alagamentos e dificultar a
-          circulação em estradas localizadas nas áreas mais baixas.
-        </p>
-
-        <dl class="resumo-estradas">
-          <div>
-            <dt>Vias monitoradas</dt>
-            <dd>Três acessos com regras simuladas.</dd>
-          </div>
-
-          <div>
-            <dt>Nível na Estação 1</dt>
-            <dd id="nivel-estradas">Carregando...</dd>
-          </div>
-
-          <div>
-            <dt>Veículos de pequeno porte</dt>
-            <dd id="regra-pequeno-porte">Bloqueio simulado a partir de 7,00 m.</dd>
-          </div>
-
-          <div>
-            <dt>Veículos de grande porte</dt>
-            <dd id="regra-grande-porte">Bloqueio simulado acima de 7,50 m.</dd>
-          </div>
-
-          <div id="desvio-agudo-dona-francisca" class="situacao-via">
-            <dt>Desvio entre Agudo e Dona Francisca</dt>
-            <dd
-              id="situacao-desvio-agudo-dona-francisca"
-              aria-live="polite"
-            >
-              Carregando...
-            </dd>
-          </div>
-
-          <div id="estrada-geral-nova-boemia" class="situacao-via">
-            <dt>Estrada Geral para Nova Boêmia</dt>
-            <dd id="situacao-estrada-geral-nova-boemia">
-              Carregando...
-            </dd>
-          </div>
-
-          <div id="acesso-captacao-corsan" class="situacao-via">
-            <dt>Acesso à captação da Corsan</dt>
-            <dd id="situacao-acesso-captacao-corsan" aria-live="polite">
-              Carregando...
-            </dd>
-          </div>
-
-          <div>
-            <dt>Fonte</dt>
-            <dd id="fonte-regras-estradas">Carregando...</dd>
-          </div>
-        </dl>
-
-        <details>
-          <summary>Como o nível do rio pode afetar as estradas?</summary>
-
-          <p>
-            Estradas em áreas baixas podem ser atingidas antes de outras. O
-            impacto depende da localização, da elevação da via, da chuva
-            acumulada, da drenagem e das condições verificadas no local.
+      <section id="culturas" aria-labelledby="culturas-titulo">
+        <div class="culturas-conteudo">
+          <p class="culturas-selo">Planejamento agrícola</p>
+          <h2 id="culturas-titulo">Culturas</h2>
+          <p class="culturas-introducao">
+            Referências técnicas publicadas pelo IRGA em diferentes anos sobre
+            culturas utilizadas na diversificação e rotação em terras baixas.
+            Consulte as recomendações e o zoneamento da safra atual antes do
+            plantio.
           </p>
 
-          <p>
-            Neste protótipo, o resultado é calculado somente pelas regras
-            simuladas de nível. Ele não confirma as condições reais da via.
-            Fechamentos devem ser confirmados pelos órgãos responsáveis.
-          </p>
-        </details>
+          <div class="grade-culturas">
+            <article>
+              <span class="icone-cultura" role="img" aria-label="Espiga de arroz">🌾</span>
+              <h3>Arroz irrigado</h3>
+              <p>Cultura central dos sistemas de terras baixas acompanhados pelo IRGA e referência para o planejamento das rotações.</p>
+            </article>
 
-        <p class="aviso-seguranca">
-          <strong>Orientação de segurança:</strong> antes de viajar, consulte
-          os canais oficiais e não atravesse trechos alagados.
-        </p>
+            <article>
+              <span class="icone-cultura" role="img" aria-label="Broto de soja">🌱</span>
+              <h3>Soja</h3>
+              <p>Principal cultura de primavera-verão utilizada em rotação com o arroz irrigado, conforme materiais técnicos do instituto.</p>
+              <a href="https://irga.rs.gov.br/upload/arquivos/202001/10152924-circular-tecnica-003-2020.pdf" target="_blank" rel="noopener noreferrer">Ver circular técnica do IRGA</a>
+            </article>
+
+            <article>
+              <span class="icone-cultura" role="img" aria-label="Espiga de milho">🌽</span>
+              <h3>Milho irrigado</h3>
+              <p>Alternativa com potencial para rotação e diversificação, desde que o manejo da água e as condições da área sejam adequados.</p>
+              <a href="https://admin.irga.rs.gov.br/upload/arquivos/202510/15082641-nt-003-2025-milho-irrigado-como-opcao-para-rotacao-na-lavoura-de-arroz-irrigado-no-estado-do-rs.pdf" target="_blank" rel="noopener noreferrer">Ver nota técnica do IRGA</a>
+            </article>
+
+            <article>
+              <span class="icone-cultura" role="img" aria-label="Pastagem e sorgo">🌿</span>
+              <h3>Pastagens e sorgo</h3>
+              <p>Alternativas citadas pelo IRGA em sistemas diversificados de terras baixas, condicionadas ao objetivo produtivo da propriedade.</p>
+              <a href="https://irga.rs.gov.br/irga-sedia-curso-basico-de-irrigacao-por-sulcos" target="_blank" rel="noopener noreferrer">Consultar referência do IRGA</a>
+            </article>
+          </div>
+
+          <p class="culturas-aviso">
+            <strong>Antes de plantar:</strong> estas informações não substituem análise de solo, zoneamento agrícola nem recomendação de um profissional habilitado. Consulte a assistência técnica do IRGA para avaliar a área.
+          </p>
+          <a class="culturas-fonte" href="https://irga.rs.gov.br/rotacao-de-culturas-sera-oferecida-pela-embrapa-e-irga-atraves-de-acordo" target="_blank" rel="noopener noreferrer">Conhecer materiais sobre rotação de culturas no IRGA</a>
+        </div>
       </section>
+
+      <section id="el-nino" aria-labelledby="el-nino-titulo">
+        <div class="el-nino-conteudo">
+          <p class="el-nino-selo">Clima e agricultura</p>
+          <p class="el-nino-data">
+            Boletim do IRGA publicado em
+            <time datetime="2026-07-31">31 de julho de 2026</time>
+          </p>
+          <h2 id="el-nino-titulo">El Niño</h2>
+          <p class="el-nino-introducao">
+            O IRGA informa que o El Niño segue em intensificação. O fenômeno
+            aumenta a probabilidade de chuvas mais frequentes e volumosas no
+            Rio Grande do Sul, mas seus efeitos não são iguais em todos os
+            locais nem eliminam a possibilidade de períodos secos.
+          </p>
+
+          <div class="grade-el-nino">
+            <article>
+              <span class="icone-el-nino" role="img" aria-label="Oceano aquecido">🌊</span>
+              <p class="el-nino-rotulo">Situação observada</p>
+              <h3>Pacífico mais quente</h3>
+              <p>
+                O sistema oceano-atmosfera refletia um El Niño em intensificação,
+                com amplo aquecimento no Pacífico Equatorial.
+              </p>
+            </article>
+
+            <article>
+              <span class="icone-el-nino" role="img" aria-label="Chuva">🌧️</span>
+              <p class="el-nino-rotulo">Perspectiva para o RS</p>
+              <h3>Chuva acima da normal</h3>
+              <p>
+                Os modelos citados pelo IRGA convergiam para precipitação acima
+                da normal climatológica a partir de agosto de 2026.
+              </p>
+            </article>
+
+            <article>
+              <span class="icone-el-nino" role="img" aria-label="Área agrícola drenada">🚜</span>
+              <p class="el-nino-rotulo">Manejo agrícola</p>
+              <h3>Drenagem e semeadura</h3>
+              <p>
+                O instituto recomenda aproveitar períodos secos, manter drenagem
+                eficiente e evitar semeaduras muito tardias de arroz e soja.
+              </p>
+            </article>
+
+            <article>
+              <span class="icone-el-nino" role="img" aria-label="Rio em atenção">⚠️</span>
+              <p class="el-nino-rotulo">Áreas próximas a rios</p>
+              <h3>Maior atenção</h3>
+              <p>
+                O boletim aponta maior risco de enchentes e recomenda cautela
+                com grandes investimentos em áreas próximas aos rios.
+              </p>
+            </article>
+          </div>
+
+          <p class="el-nino-aviso">
+            <strong>Importante:</strong> projeções climáticas indicam probabilidades,
+            não uma previsão exata para Agudo. Acompanhe também previsões de curto
+            prazo e alertas oficiais.
+          </p>
+
+          <a class="el-nino-fonte" href="https://irga.rs.gov.br/informacoes-meteorologicas-old-6a6b5d8ade7bf" target="_blank" rel="noopener noreferrer">Ler o boletim completo no site do IRGA</a>
+        </div>
+      </section>
+
     </main>
         <footer>
             <div>
@@ -546,5 +527,6 @@
             </div>
           </div>
         </footer>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   </body>
 </html>

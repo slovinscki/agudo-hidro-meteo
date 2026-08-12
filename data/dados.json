@@ -8,6 +8,8 @@
     "nivelRio": 6.2,
     "unidadeNivel": "m",
     "tendencia": "Subindo lentamente",
+    "taxaVariacaoCmHora": null,
+    "cotaInundacao": 7.5,
     "precipitacao24h": 12.4,
     "unidadePrecipitacao": "mm",
     "medidoEm": "2026-08-07T14:30:00-03:00",  

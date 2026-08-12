@@ -25,6 +25,47 @@ function atualizarTexto(id, texto) {
   }
 }
 
+function definirEstadoResumoNivel(nivel, medicao, dadosAna) {
+  const resumoNivel = document.querySelector("#resumo-nivel");
+
+  if (!resumoNivel) {
+    return;
+  }
+
+  const cotaInundacao = medicao.cotaInundacao;
+  const taxaVariacaoCmHora =
+    dadosAna?.medicao?.taxaVariacaoCmHora ?? medicao.taxaVariacaoCmHora;
+  const tendencia = (
+    dadosAna?.medicao?.tendencia ?? medicao.tendencia ?? ""
+  ).toLocaleLowerCase("pt-BR");
+  const estaSubindo = tendencia.includes("subindo") || taxaVariacaoCmHora > 0;
+  const estaEstavel = tendencia.includes("estável") || tendencia.includes("estavel");
+  const taxaVariacaoMetrosHora = taxaVariacaoCmHora / 100;
+  const horasAteCota =
+    typeof cotaInundacao === "number" && taxaVariacaoMetrosHora > 0
+      ? (cotaInundacao - nivel) / taxaVariacaoMetrosHora
+      : Number.POSITIVE_INFINITY;
+
+  let estado = "neutro";
+
+  if (
+    typeof cotaInundacao === "number" &&
+    (nivel >= cotaInundacao || (horasAteCota >= 0 && horasAteCota <= 2))
+  ) {
+    estado = "vermelho";
+  } else if (estaSubindo) {
+    estado = "laranja";
+  } else if (
+    estaEstavel &&
+    typeof cotaInundacao === "number" &&
+    nivel < cotaInundacao
+  ) {
+    estado = "verde";
+  }
+
+  resumoNivel.dataset.estado = estado;
+}
+
 function avaliarImpactoEstrada(nivel, regras) {
   if (regras.tipoRegra === "bloqueio_total") {
     if (nivel >= regras.limiteBloqueio) {
@@ -214,10 +255,9 @@ function exibirDados(dados, dadosAna = null) {
   atualizarTexto("fonte-nivel", fonteNivel);
   atualizarTexto("chuva-24h", chuvaFormatada);
 
-  document.querySelector("#nivel-atual").value = nivel;
-  document.querySelector("#chuva-24h").value = medicao.precipitacao24h;
+  definirEstadoResumoNivel(nivel, medicao, dadosAna);
+
   document.querySelector("#resumo-horario").dateTime = medidoEm;
-  document.querySelector("#horario-nivel").dateTime = medidoEm;
 
   exibirImpactoEstradas(
     nivel,
@@ -247,6 +287,7 @@ function exibirErro() {
   }
   atualizarTexto("situacao-liberacao-usinas", mensagem);
   atualizarTexto("efeito-liberacao-usinas", mensagem);
+  document.querySelector("#resumo-nivel")?.removeAttribute("data-estado");
 }
 
 function criarItemDetalhe(titulo, valor) {

@@ -178,7 +178,6 @@ nav a[href^="https://wa.me/"] {
   color: var(--cor-lima);
 }
 
-body > header > a:last-child,
 #canais-oficiais li a {
   display: inline-flex;
   min-height: 2.75rem;
@@ -192,11 +191,7 @@ body > header > a:last-child,
   text-decoration: none;
 }
 
-body > header > a:last-child {
-  width: fit-content;
-}
-
-/* ========================================================================== 
+/* ==========================================================================
    3. Estrutura e situacao atual
    ========================================================================== */
 
@@ -213,8 +208,30 @@ main > section + section {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 90% 15%, rgb(0 184 217 / 22%), transparent 35%),
+    radial-gradient(circle at 82% 12%, rgb(98 230 255 / 34%), transparent 30%),
+    radial-gradient(circle at 58% 48%, rgb(215 255 69 / 13%), transparent 24%),
+    radial-gradient(circle at 18% 88%, rgb(0 184 217 / 20%), transparent 34%),
     linear-gradient(145deg, #101417 0%, var(--cor-fundo) 70%);
+}
+
+#inicio::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgb(245 247 248 / 24%) 0 0.045rem, transparent 0.065rem),
+    radial-gradient(circle, rgb(98 230 255 / 20%) 0 0.04rem, transparent 0.06rem);
+  background-position: 0 0, 0.19rem 0.13rem;
+  background-size: 0.3rem 0.3rem, 0.41rem 0.41rem;
+  content: "";
+  mask-image: linear-gradient(to bottom, rgb(0 0 0 / 88%), rgb(0 0 0 / 35%));
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+#inicio > * {
+  position: relative;
+  z-index: 1;
 }
 
 #inicio::after {
@@ -281,12 +298,85 @@ dd {
   color: var(--cor-texto);
 }
 
-#inicio > dl > div:first-child dd {
+#resumo-nivel {
+  --cor-brilho-nivel: var(--cor-borda);
+
+  position: relative;
+  isolation: isolate;
+  width: fit-content;
+  overflow: hidden;
+  margin-top: var(--espaco-3);
+  padding: 0.16em 0.2em;
+  border-radius: calc(var(--raio) + 0.2rem);
   color: var(--cor-lima);
   font-size: clamp(2.5rem, 14vw, 5rem);
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.06em;
+}
+
+#resumo-nivel::before,
+#resumo-nivel::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+#resumo-nivel::before {
+  z-index: -2;
+  inset: -140%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 38%,
+    var(--cor-brilho-nivel) 48% 53%,
+    transparent 63% 100%
+  );
+  animation: girar-brilho-nivel 2.8s linear infinite;
+}
+
+#resumo-nivel::after {
+  z-index: -1;
+  inset: 0.1rem;
+  border-radius: calc(var(--raio) + 0.1rem);
+  background: var(--cor-fundo);
+  box-shadow:
+    inset 0 0 1.25rem color-mix(in srgb, var(--cor-brilho-nivel) 35%, transparent),
+    0 0 1.5rem color-mix(in srgb, var(--cor-brilho-nivel) 28%, transparent);
+}
+
+.resumo-nivel-cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem var(--espaco-2);
+}
+
+.resumo-nivel-estacao {
+  color: var(--cor-texto-secundario);
+  font-size: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+
+#resumo-nivel[data-estado="verde"] {
+  --cor-brilho-nivel: var(--cor-lima);
+  color: var(--cor-lima);
+}
+
+#resumo-nivel[data-estado="laranja"] {
+  --cor-brilho-nivel: var(--cor-aviso);
+  color: var(--cor-aviso);
+}
+
+#resumo-nivel[data-estado="vermelho"] {
+  --cor-brilho-nivel: var(--cor-bloqueio);
+  color: var(--cor-bloqueio);
+}
+
+@keyframes girar-brilho-nivel {
+  to {
+    transform: rotate(1turn);
+  }
 }
 
 #inicio > p:last-child {
@@ -772,6 +862,225 @@ th {
 }
 
 /* ==========================================================================
+   Culturas e planejamento agrícola
+   ========================================================================== */
+
+#culturas {
+  --cor-culturas-fundo: #182019;
+  --cor-culturas-superficie: rgb(32 44 31 / 88%);
+  --cor-culturas-destaque: #f2c66d;
+  --cor-culturas-verde: #a9cf71;
+  --cor-culturas-texto: #f6f1df;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(rgb(24 32 25 / 88%), rgb(24 32 25 / 94%)),
+    var(--cor-culturas-fundo);
+  color: var(--cor-culturas-texto);
+}
+
+#culturas::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 1000' preserveAspectRatio='xMidYMid slice'%3E%3Cg fill='none' stroke='%23a9cf71' stroke-opacity='.25' stroke-width='2'%3E%3Cpath d='M-80 120C90 35 248 70 365 160s245 118 390 32 266-86 405 8 282 118 520 8'/%3E%3Cpath d='M-90 166C72 86 232 112 350 199s249 112 394 31 274-77 412 14 286 109 529 3'/%3E%3Cpath d='M-95 218C61 143 215 159 338 242s253 105 399 31 280-66 417 19 290 98 534-5'/%3E%3Cpath d='M-94 275C55 204 202 211 327 289s257 96 405 30 284-53 421 26 294 85 539-14'/%3E%3Cpath d='M-83 337C58 271 194 270 319 341s261 87 410 29 287-38 423 34 298 71 542-24'/%3E%3Cpath d='M-60 403C72 343 198 335 322 399s260 77 409 27 287-22 422 43 297 56 537-34'/%3E%3Cpath d='M-27 472C98 420 215 405 335 462s253 67 397 25 281-7 414 52 293 41 527-43'/%3E%3Cpath d='M15 543C133 499 244 479 359 529s242 57 379 23 270 8 400 60 286 27 511-50'/%3E%3Cpath d='M65 615C178 580 282 555 393 598s229 48 359 21 258 22 384 68 278 14 493-56'/%3E%3Cpath d='M119 686C227 659 326 631 433 667s216 40 340 20 247 35 369 75 270 3 473-60'/%3E%3Cpath d='M171 756C276 738 371 707 474 737s205 33 323 19 238 46 356 81 261-6 454-62'/%3E%3Cpath d='M214 824C317 814 409 781 509 805s197 28 310 18 232 54 347 85 254-13 440-62'/%3E%3Cpath d='M246 890C348 887 438 854 536 872s192 24 302 17 229 59 342 87 250-17 431-60'/%3E%3C/g%3E%3Cg fill='none' stroke='%23f2c66d' stroke-opacity='.12' stroke-width='1.5'%3E%3Cpath d='M980-80c-130 145-112 274 18 360s155 196 63 328-99 257 20 391'/%3E%3Cpath d='M1050-75c-119 139-97 258 27 341s145 186 59 311-88 246 27 373'/%3E%3Cpath d='M1122-65c-108 132-83 241 35 322s135 175 56 293-77 234 34 354'/%3E%3C/g%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: "";
+  pointer-events: none;
+}
+
+.culturas-conteudo {
+  position: relative;
+  z-index: 1;
+}
+
+.culturas-selo {
+  width: fit-content;
+  margin-bottom: var(--espaco-3);
+  padding: 0.35rem 0.7rem;
+  border: 0.0625rem solid var(--cor-culturas-destaque);
+  border-radius: 999rem;
+  color: var(--cor-culturas-destaque);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#culturas h2,
+#culturas h3 {
+  color: var(--cor-culturas-texto);
+}
+
+.culturas-introducao {
+  max-width: 52rem;
+  color: rgb(246 241 223 / 78%);
+  font-size: 1.1rem;
+}
+
+.grade-culturas {
+  display: grid;
+  gap: var(--espaco-3);
+  margin: var(--espaco-5) 0;
+}
+
+.grade-culturas article {
+  border-color: rgb(169 207 113 / 38%);
+  background: var(--cor-culturas-superficie);
+  box-shadow: 0 1rem 2.5rem rgb(3 8 4 / 18%);
+  backdrop-filter: blur(0.3rem);
+}
+
+.icone-cultura {
+  display: block;
+  margin-bottom: var(--espaco-2);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.grade-culturas p,
+.culturas-aviso {
+  color: rgb(246 241 223 / 76%);
+}
+
+.grade-culturas a,
+.culturas-fonte {
+  color: var(--cor-culturas-verde);
+  font-weight: 800;
+}
+
+.culturas-aviso {
+  max-width: 52rem;
+  padding: var(--espaco-3);
+  border-left: 0.25rem solid var(--cor-culturas-destaque);
+  background: rgb(242 198 109 / 9%);
+}
+
+.culturas-aviso strong {
+  color: var(--cor-culturas-destaque);
+}
+
+/* ==========================================================================
+   El Niño e perspectiva climática
+   ========================================================================== */
+
+#el-nino {
+  --cor-el-nino-fundo: #071b2b;
+  --cor-el-nino-oceano: #37b6d8;
+  --cor-el-nino-quente: #ff815f;
+  --cor-el-nino-sol: #ffc857;
+  --cor-el-nino-texto: #f4f7f6;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 18%, rgb(55 182 216 / 24%), transparent 30%),
+    radial-gradient(circle at 88% 74%, rgb(255 129 95 / 26%), transparent 32%),
+    linear-gradient(145deg, #071b2b 0%, #102e3b 52%, #35231f 100%);
+  color: var(--cor-el-nino-texto);
+}
+
+#el-nino::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 800' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%2337b6d8' stroke-opacity='.16' stroke-width='2'%3E%3Cpath d='M-100 180C120 60 310 270 520 150s395-36 560 70 350-78 620 12'/%3E%3Cpath d='M-100 230C120 110 310 320 520 200s395-36 560 70 350-78 620 12'/%3E%3Cpath d='M-100 280C120 160 310 370 520 250s395-36 560 70 350-78 620 12'/%3E%3C/g%3E%3Cg fill='none' stroke='%23ff815f' stroke-opacity='.15' stroke-width='2'%3E%3Cpath d='M-80 560C160 410 340 650 590 500s410-5 610 88 330-110 500-32'/%3E%3Cpath d='M-80 615C160 465 340 705 590 555s410-5 610 88 330-110 500-32'/%3E%3Cpath d='M-80 670C160 520 340 760 590 610s410-5 610 88 330-110 500-32'/%3E%3C/g%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: "";
+  pointer-events: none;
+}
+
+.el-nino-conteudo {
+  position: relative;
+  z-index: 1;
+}
+
+.el-nino-selo {
+  width: fit-content;
+  margin-bottom: var(--espaco-2);
+  padding: 0.35rem 0.7rem;
+  border: 0.0625rem solid var(--cor-el-nino-sol);
+  border-radius: 999rem;
+  color: var(--cor-el-nino-sol);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.el-nino-data {
+  color: rgb(244 247 246 / 64%);
+  font-size: 0.8rem;
+}
+
+#el-nino h2,
+#el-nino h3 {
+  color: var(--cor-el-nino-texto);
+}
+
+.el-nino-introducao {
+  max-width: 54rem;
+  color: rgb(244 247 246 / 80%);
+  font-size: 1.1rem;
+}
+
+.grade-el-nino {
+  display: grid;
+  gap: var(--espaco-3);
+  margin: var(--espaco-5) 0;
+}
+
+.grade-el-nino article {
+  border-color: rgb(55 182 216 / 35%);
+  background: rgb(7 27 43 / 76%);
+  box-shadow: 0 1rem 2.5rem rgb(0 8 15 / 24%);
+  backdrop-filter: blur(0.35rem);
+}
+
+.icone-el-nino {
+  display: block;
+  margin-bottom: var(--espaco-3);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.el-nino-rotulo {
+  margin-bottom: var(--espaco-1);
+  color: var(--cor-el-nino-quente);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.grade-el-nino article > p:last-child,
+.el-nino-aviso {
+  color: rgb(244 247 246 / 72%);
+}
+
+.el-nino-aviso {
+  max-width: 54rem;
+  padding: var(--espaco-3);
+  border-left: 0.25rem solid var(--cor-el-nino-quente);
+  background: rgb(255 129 95 / 10%);
+}
+
+.el-nino-aviso strong {
+  color: var(--cor-el-nino-sol);
+}
+
+.el-nino-fonte {
+  color: var(--cor-el-nino-oceano);
+  font-weight: 800;
+}
+
+/* ==========================================================================
    6. Impacto nas estradas
    ========================================================================== */
 
@@ -904,12 +1213,7 @@ footer p {
   }
 
   body > header > nav {
-    grid-column: 1;
-  }
-
-  body > header > a:last-child {
-    grid-column: 2;
-    grid-row: 2;
+    grid-column: 1 / -1;
   }
 
   main > section,
@@ -957,6 +1261,14 @@ footer p {
   .resumo-estradas {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .grade-culturas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grade-el-nino {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 75rem) {
@@ -975,5 +1287,9 @@ footer p {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  #resumo-nivel::before {
+    animation: none;
   }
 }
