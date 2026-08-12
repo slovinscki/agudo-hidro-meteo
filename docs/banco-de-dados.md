@@ -27,8 +27,10 @@ Vercel. Em um plano que aceite maior frequência, altere o agendamento para
 
 ## Comportamento de fallback
 
-O endpoint `/api/ana` tenta consultar a ANA e persistir a série recebida. Se a
-fonte estiver indisponível, retorna a última medição armazenada com:
+O endpoint público `/api/ana` consulta a ANA sem depender da disponibilidade do
+banco. A persistência em lote é responsabilidade de `/api/coleta-ana`, chamado
+pelo cron protegido. Se a fonte estiver indisponível, `/api/ana` tenta retornar
+a última medição armazenada com:
 
 - fonte `ANA — última medição armazenada`;
 - `persistencia.fallback = true`;

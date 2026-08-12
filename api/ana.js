@@ -2,6 +2,8 @@ const ANA_API_URL =
   "https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas";
 
 const DURACAO_TOKEN_MS = 55 * 60 * 1000;
+const TIMEOUT_ANA_MS = 8000;
+const TIMEOUT_BANCO_MS = 5000;
 
 const {
   bancoConfigurado,
@@ -13,6 +15,20 @@ const {
 
 let tokenEmCache = null;
 let tokenExpiraEm = 0;
+
+function executarComTimeout(promessa, tempoMs, descricao) {
+  let temporizador;
+  const limite = new Promise((_, rejeitar) => {
+    temporizador = setTimeout(
+      () => rejeitar(new Error(`${descricao} excedeu ${tempoMs} ms.`)),
+      tempoMs,
+    );
+  });
+
+  return Promise.race([promessa, limite]).finally(() =>
+    clearTimeout(temporizador),
+  );
+}
 
 function obterVariavelObrigatoria(nome) {
   const valor = process.env[nome];
@@ -56,6 +72,7 @@ async function autenticar({ forcarNovoToken = false } = {}) {
   const senha = obterVariavelObrigatoria("ANA_SENHA");
 
   const resposta = await fetch(`${ANA_API_URL}/OAUth/v1`, {
+    signal: AbortSignal.timeout(TIMEOUT_ANA_MS),
     headers: {
       Accept: "application/json",
       Identificador: identificador,
@@ -104,6 +121,7 @@ function criarUrlDaSerie() {
 
 async function consultarSerie(token) {
   return fetch(criarUrlDaSerie(), {
+    signal: AbortSignal.timeout(TIMEOUT_ANA_MS),
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
@@ -230,15 +248,19 @@ function converterMedicaoBanco(linha) {
   };
 }
 
-async function coletarEPersistir() {
+async function coletarEPersistir({ persistir = true } = {}) {
   const codigoEstacao = obterVariavelObrigatoria("ANA_ESTACAO");
   let execucaoId = null;
 
-  if (bancoConfigurado()) {
-    execucaoId = await iniciarExecucaoColeta(codigoEstacao);
-  }
-
   try {
+    if (persistir && bancoConfigurado()) {
+      execucaoId = await executarComTimeout(
+        iniciarExecucaoColeta(codigoEstacao),
+        TIMEOUT_BANCO_MS,
+        "Inicialização da coleta no banco",
+      );
+    }
+
     let token = await autenticar();
     let respostaAna = await consultarSerie(token);
 
@@ -259,31 +281,52 @@ async function coletarEPersistir() {
       throw new Error("Nenhuma medição foi encontrada para a estação.");
     }
 
-    const quantidadeInserida = await salvarMedicoesAna(
-      codigoEstacao,
-      medicoes,
-      { numero: converterNumero, qualidade: interpretarQualidade },
-    );
-    await finalizarExecucaoColeta(execucaoId, {
-      status: "sucesso",
-      quantidadeRecebida: medicoes.length,
-      quantidadeInserida,
-    });
+    let quantidadeInserida = 0;
+    if (persistir && bancoConfigurado()) {
+      quantidadeInserida = await executarComTimeout(
+        salvarMedicoesAna(codigoEstacao, medicoes, {
+          numero: converterNumero,
+          qualidade: interpretarQualidade,
+        }),
+        TIMEOUT_BANCO_MS,
+        "Persistência das medições no banco",
+      );
+      await executarComTimeout(
+        finalizarExecucaoColeta(execucaoId, {
+          status: "sucesso",
+          quantidadeRecebida: medicoes.length,
+          quantidadeInserida,
+        }),
+        TIMEOUT_BANCO_MS,
+        "Finalização da coleta no banco",
+      );
+    }
 
     const variacaoNivel = calcularVariacaoNivel(medicoes, medicaoMaisRecente);
     return {
       dados: normalizarMedicao(medicaoMaisRecente, variacaoNivel),
       persistencia: {
         configurada: bancoConfigurado(),
+        executada: persistir && bancoConfigurado(),
         quantidadeRecebida: medicoes.length,
         quantidadeInserida,
       },
     };
   } catch (erro) {
-    await finalizarExecucaoColeta(execucaoId, {
-      status: "erro",
-      mensagemErro: erro.message,
-    });
+    if (execucaoId) {
+      try {
+        await executarComTimeout(
+          finalizarExecucaoColeta(execucaoId, {
+            status: "erro",
+            mensagemErro: erro.message,
+          }),
+          TIMEOUT_BANCO_MS,
+          "Registro do erro da coleta no banco",
+        );
+      } catch (erroBanco) {
+        console.error("Erro ao registrar falha no banco:", erroBanco.message);
+      }
+    }
     throw erro;
   }
 }
@@ -292,7 +335,11 @@ async function obterFallbackBanco() {
   const codigoEstacao = process.env.ANA_ESTACAO;
   if (!codigoEstacao || !bancoConfigurado()) return null;
 
-  const linhas = await obterUltimasMedicoes(codigoEstacao);
+  const linhas = await executarComTimeout(
+    obterUltimasMedicoes(codigoEstacao),
+    TIMEOUT_BANCO_MS,
+    "Consulta ao fallback do banco",
+  );
   if (linhas.length === 0) return null;
 
   const medicoes = linhas.map(converterMedicaoBanco);
@@ -321,7 +368,9 @@ module.exports = async function handler(requisicao, resposta) {
       "Cache-Control",
       "s-maxage=300, stale-while-revalidate=600",
     );
-    const resultado = await coletarEPersistir();
+    // A leitura pública não deve depender da disponibilidade do Neon. A
+    // persistência é executada pelo endpoint protegido da coleta agendada.
+    const resultado = await coletarEPersistir({ persistir: false });
     return resposta.status(200).json({
       ...resultado.dados,
       persistencia: resultado.persistencia,
