@@ -1,0 +1,14 @@
+{
+  "name": "agudo-hidro-meteo",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "db:migrate": "node scripts/migrate.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2"
+  }
+}

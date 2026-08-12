@@ -358,6 +358,27 @@ dd {
   text-transform: none;
 }
 
+.resumo-projecao-nivel {
+  display: grid;
+  gap: var(--espaco-2);
+  margin: var(--espaco-3) 0 0;
+}
+
+.resumo-projecao-nivel > div {
+  padding-left: var(--espaco-2);
+  border-left: 0.125rem solid var(--cor-brilho-nivel, var(--cor-borda));
+}
+
+.resumo-projecao-nivel dt {
+  font-size: 0.68rem;
+}
+
+.resumo-projecao-nivel dd {
+  color: var(--cor-texto);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
 #resumo-nivel[data-estado="verde"] {
   --cor-brilho-nivel: var(--cor-lima);
   color: var(--cor-lima);

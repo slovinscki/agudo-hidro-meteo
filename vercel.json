@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/coleta-ana",
+      "schedule": "0 9 * * *"
+    }
+  ]
+}

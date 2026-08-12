@@ -25,6 +25,68 @@ function atualizarTexto(id, texto) {
   }
 }
 
+function formatarTempoAteCota(horasTotais) {
+  const horasArredondadas = Math.max(1, Math.ceil(horasTotais));
+  const dias = Math.floor(horasArredondadas / 24);
+  const horas = horasArredondadas % 24;
+
+  if (dias === 0) {
+    return `${horas} ${horas === 1 ? "hora" : "horas"}`;
+  }
+
+  if (horas === 0) {
+    return `${dias} ${dias === 1 ? "dia" : "dias"}`;
+  }
+
+  return `${dias} ${dias === 1 ? "dia" : "dias"} e ${horas} ${horas === 1 ? "hora" : "horas"}`;
+}
+
+function exibirProjecaoNivel(nivel, medicao, dadosAna) {
+  const cotaInundacao = medicao.cotaInundacao;
+  const taxaVariacaoCmHora =
+    dadosAna?.medicao?.taxaVariacaoCmHora ?? medicao.taxaVariacaoCmHora;
+  const tendencia = dadosAna?.medicao?.tendencia ?? medicao.tendencia;
+
+  if (typeof cotaInundacao !== "number") {
+    atualizarTexto("resumo-percentual-cota", "Cota não cadastrada");
+    atualizarTexto("resumo-tempo-cota", "Indisponível");
+  } else {
+    const percentual = (nivel / cotaInundacao) * 100;
+    atualizarTexto(
+      "resumo-percentual-cota",
+      `${Math.round(percentual)}% de ${formatarNumero(cotaInundacao)} m`,
+    );
+
+    if (nivel >= cotaInundacao) {
+      atualizarTexto("resumo-tempo-cota", "Cota atingida ou ultrapassada");
+    } else if (typeof taxaVariacaoCmHora === "number" && taxaVariacaoCmHora > 0) {
+      const horasAteCota =
+        ((cotaInundacao - nivel) * 100) / taxaVariacaoCmHora;
+      atualizarTexto(
+        "resumo-tempo-cota",
+        formatarTempoAteCota(horasAteCota),
+      );
+    } else {
+      atualizarTexto(
+        "resumo-tempo-cota",
+        taxaVariacaoCmHora === null || taxaVariacaoCmHora === undefined
+          ? "Indisponível sem velocidade calculada"
+          : "Sem previsão enquanto não estiver subindo",
+      );
+    }
+  }
+
+  if (typeof taxaVariacaoCmHora === "number") {
+    const sinal = taxaVariacaoCmHora > 0 ? "+" : "";
+    atualizarTexto(
+      "resumo-velocidade-nivel",
+      `${sinal}${formatarNumero(taxaVariacaoCmHora)} cm/h · ${tendencia ?? "tendência indefinida"}`,
+    );
+  } else {
+    atualizarTexto("resumo-velocidade-nivel", "Indisponível");
+  }
+}
+
 function definirEstadoResumoNivel(nivel, medicao, dadosAna) {
   const resumoNivel = document.querySelector("#resumo-nivel");
 
@@ -256,6 +318,7 @@ function exibirDados(dados, dadosAna = null) {
   atualizarTexto("chuva-24h", chuvaFormatada);
 
   definirEstadoResumoNivel(nivel, medicao, dadosAna);
+  exibirProjecaoNivel(nivel, medicao, dadosAna);
 
   document.querySelector("#resumo-horario").dateTime = medidoEm;
 
@@ -287,6 +350,9 @@ function exibirErro() {
   }
   atualizarTexto("situacao-liberacao-usinas", mensagem);
   atualizarTexto("efeito-liberacao-usinas", mensagem);
+  atualizarTexto("resumo-percentual-cota", mensagem);
+  atualizarTexto("resumo-velocidade-nivel", mensagem);
+  atualizarTexto("resumo-tempo-cota", mensagem);
   document.querySelector("#resumo-nivel")?.removeAttribute("data-estado");
 }
 
