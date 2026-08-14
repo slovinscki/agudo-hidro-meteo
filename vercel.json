@@ -1,8 +1,10 @@
 {
-  "crons": [
-    {
-      "path": "/api/coleta-ana",
-      "schedule": "0 9 * * *"
+  "functions": {
+    "api/coleta-ana.js": {
+      "maxDuration": 60
+    },
+    "api/coleta-plugfield.js": {
+      "maxDuration": 60
     }
-  ]
+  }
 }

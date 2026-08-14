@@ -1,8 +1,58 @@
 [
   {
+    "id": "desvio-2026-07-25-1834",
+    "localId": "desvio",
+    "localNome": "Sangrador / Desvio Agudo–Dona Francisca",
+    "nomeUsadoNaFonte": "Sangrador",
+    "dataHoraOcorrencia": "2026-07-25T18:34:00-03:00",
+    "dataHoraPublicacao": null,
+    "precisaoHorario": "informado_na_publicacao",
+    "situacao": "bloqueio_confirmado",
+    "descricao": "Sangrador bloqueado.",
+    "veiculosAfetados": [],
+    "fonte": {
+      "autor": "Enagio Mattje",
+      "instituicao": null,
+      "tipo": "publicacao_facebook",
+      "url": null
+    },
+    "estacaoReferencia": "85400000",
+    "nivelRioMetros": null,
+    "statusValidacao": "pendente_cruzamento_hidrologico",
+    "observacoes": [
+      "Horário e situação informados pelo usuário com base em publicação no Facebook.",
+      "Link original ainda não cadastrado."
+    ]
+  },
+  {
+    "id": "desvio-2026-07-26-1330",
+    "localId": "desvio",
+    "localNome": "Sangrador / Desvio Agudo–Dona Francisca",
+    "nomeUsadoNaFonte": "Sangrador",
+    "dataHoraOcorrencia": "2026-07-26T13:30:00-03:00",
+    "dataHoraPublicacao": null,
+    "precisaoHorario": "informado_na_publicacao",
+    "situacao": "bloqueio_confirmado",
+    "descricao": "Sangrador bloqueado.",
+    "veiculosAfetados": [],
+    "fonte": {
+      "autor": "Enagio Mattje",
+      "instituicao": null,
+      "tipo": "publicacao_facebook",
+      "url": null
+    },
+    "estacaoReferencia": "85400000",
+    "nivelRioMetros": null,
+    "statusValidacao": "pendente_cruzamento_hidrologico",
+    "observacoes": [
+      "Horário e situação informados pelo usuário com base em publicação no Facebook.",
+      "Link original ainda não cadastrado."
+    ]
+  },
+  {
     "id": "desvio-2026-07-28-2055",
     "localId": "desvio",
-    "localNome": "Desvio",
+    "localNome": "Sangrador / Desvio Agudo–Dona Francisca",
     "nomeUsadoNaFonte": "Sangrador",
     "dataHoraOcorrencia": null,
     "dataHoraPublicacao": "2026-07-28T20:55:00-03:00",
@@ -25,6 +75,75 @@
     "observacoes": [
       "Confirmar se 20h55 corresponde à publicação ou à gravação.",
       "Confirmar no áudio a referência aos tipos de veículos."
+    ]
+  },
+  {
+    "id": "desvio-2026-07-29-0830",
+    "localId": "desvio",
+    "localNome": "Sangrador / Desvio Agudo–Dona Francisca",
+    "nomeUsadoNaFonte": "Sangrador",
+    "dataHoraOcorrencia": "2026-07-29T08:30:00-03:00",
+    "dataHoraPublicacao": null,
+    "precisaoHorario": "informado_na_publicacao",
+    "situacao": "bloqueio_confirmado",
+    "descricao": "Sangrador bloqueado.",
+    "veiculosAfetados": [],
+    "fonte": {
+      "autor": "Enagio Mattje",
+      "instituicao": null,
+      "tipo": "publicacao_facebook",
+      "url": "https://www.facebook.com/enagio.mattje.2025/posts/122155274996414369"
+    },
+    "estacaoReferencia": "85400000",
+    "nivelRioMetros": null,
+    "statusValidacao": "pendente_cruzamento_hidrologico",
+    "observacoes": [
+      "Registro reclassificado de Porto Agudo para o Sangrador conforme correção do usuário."
+    ]
+  },
+  {
+    "id": "desvio-2026-08-14-bloqueio-total",
+    "localId": "desvio",
+    "localNome": "Sangrador / Desvio Agudo–Dona Francisca",
+    "nomeUsadoNaFonte": "Sangrador",
+    "dataOcorrencia": "2026-08-14",
+    "dataHoraOcorrencia": null,
+    "dataHoraPublicacao": null,
+    "precisaoHorario": "nao_informado",
+    "tipoEvento": "operacional_hidrologico",
+    "situacao": "bloqueio_confirmado",
+    "status": "BLOQUEADO",
+    "restricao": "TODOS OS VEICULOS",
+    "descricao": "Desvio entre Agudo e Dona Francisca (Sangrador) bloqueado para veículos de qualquer porte.",
+    "veiculosAfetados": [
+      "todos"
+    ],
+    "fontes": [
+      {
+        "autor": "Enagio Mattje",
+        "instituicao": null,
+        "tipo": "foto_facebook",
+        "referencia": "pfbid0Kk2G31rXS8ZSu29eLTmwCqqbe5sH5Ti3PhXnTvBk12NsY1YSHoGpsv8wyNLsfmzfl",
+        "url": "https://www.facebook.com/enagio.mattje.2025/posts/pfbid0Kk2G31rXS8ZSu29eLTmwCqqbe5sH5Ti3PhXnTvBk12NsY1YSHoGpsv8wyNLsfmzfl",
+        "informacao": "Publicou uma foto informando ou mostrando que o desvio está bloqueado para veículos de qualquer porte."
+      },
+      {
+        "autor": "Edinho Lipke",
+        "instituicao": "Secretaria Municipal de Obras",
+        "funcao": "Secretário de Obras",
+        "tipo": "fonte_institucional",
+        "url": null,
+        "informacao": "Informou que o Sangrador está bloqueado para todos os tipos de veículos."
+      }
+    ],
+    "confirmacao": "duas_fontes_independentes",
+    "estacaoReferencia": "85400000",
+    "nivelRioMetros": null,
+    "criterioHidrologico": "ainda_nao_determinado",
+    "statusValidacao": "pendente_cruzamento_hidrologico",
+    "observacoes": [
+      "Não há horário exato disponível para a ocorrência ou para a publicação.",
+      "O bloqueio total é sustentado por duas fontes independentes, uma observação em foto no Facebook e uma fonte institucional."
     ]
   }
 ]

@@ -81,51 +81,89 @@
 
     <main id="conteudo-principal">
       <section id="inicio" aria-labelledby="situacao-titulo">
-        <p><strong>Dados reais e conteúdo em desenvolvimento</strong></p>
-
         <h1 id="situacao-titulo">Situação atual</h1>
 
         <p>
-          ATENÇÃO: o nível da Estação 1 é consultado na ANA. Cotas de
-          referência, tendências, impactos em estradas e demais valores ainda
-          podem ser simulados e são identificados na página.
+          O nível da Estação 1 é consultado na ANA. Quando uma integração não
+          estiver disponível, o sistema informa a ausência da medição sem
+          inventar ou reutilizar valores locais.
         </p>
 
-        <dl>
-          <div>
+        <dl class="resumo-estacoes-nivel">
+          <div class="resumo-estacao-nivel">
             <dt class="resumo-nivel-cabecalho">
-              <span>Nível do rio</span>
-              <span class="resumo-nivel-estacao">Estação Ponte Dona Franscisa</span>
+              <span class="resumo-nivel-estacao">Estação Ponte Dona Franscisca</span>
             </dt>
-            <dd id="resumo-nivel">Carregando...</dd>
+            <dd id="resumo-nivel" class="resumo-nivel-valor">Carregando...</dd>
+            <dl class="resumo-metadados-nivel">
+              <div>
+                <dt>Última medição</dt>
+                <dd>
+                  <time id="resumo-horario" datetime="">
+                    Carregando...
+                  </time>
+                </dd>
+              </div>
+              <div>
+                <dt>Status</dt>
+                <dd id="resumo-status">Carregando...</dd>
+              </div>
+            </dl>
             <dl class="resumo-projecao-nivel">
               <div>
                 <dt>Percentual da cota</dt>
                 <dd id="resumo-percentual-cota">Calculando...</dd>
+                <div
+                  id="barra-percentual-cota"
+                  class="barra-percentual-cota"
+                  role="progressbar"
+                  aria-label="Percentual da cota"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="0"
+                >
+                  <span></span>
+                </div>
               </div>
               <div>
                 <dt>Velocidade do nível</dt>
                 <dd id="resumo-velocidade-nivel">Calculando...</dd>
               </div>
               <div>
-                <dt>Tempo estimado até a cota</dt>
+                <dt>Tempo estimado até as cotas</dt>
                 <dd id="resumo-tempo-cota">Calculando...</dd>
               </div>
             </dl>
           </div>
-
-          <div>
-            <dt>Última medição</dt>
-            <dd>
-              <time id="resumo-horario" datetime="">
-                Carregando...
-              </time>
-            </dd>
-          </div>
-
-          <div>
-            <dt>Status</dt>
-            <dd id="resumo-status">Carregando...</dd>
+          <div class="resumo-estacao-nivel">
+            <dt class="resumo-nivel-cabecalho">
+              <span class="resumo-nivel-estacao">Estação Porto Agudo / Captação da Corsan</span>
+            </dt>
+            <dd class="resumo-nivel-valor">Dados indisponíveis</dd>
+            <dl class="resumo-metadados-nivel">
+              <div>
+                <dt>Última medição</dt>
+                <dd>Dados indisponíveis</dd>
+              </div>
+              <div>
+                <dt>Status</dt>
+                <dd>Integração instrumental pendente</dd>
+              </div>
+            </dl>
+            <dl class="resumo-projecao-nivel">
+              <div>
+                <dt>Percentual da cota</dt>
+                <dd>Dados indisponíveis</dd>
+              </div>
+              <div>
+                <dt>Velocidade do nível</dt>
+                <dd>Dados indisponíveis</dd>
+              </div>
+              <div>
+                <dt>Tempo estimado até a cota</dt>
+                <dd>Dados indisponíveis</dd>
+              </div>
+            </dl>
           </div>
         </dl>
 
@@ -146,6 +184,42 @@
         <p>
           A projeção usa a variação recente do nível e pode mudar rapidamente.
           Não utilize esta estimativa como alerta oficial.
+        </p>
+      </section>
+
+      <div class="painel-chuvas" aria-label="Acompanhamento de chuvas">
+        <section id="chuva-monitorada" aria-labelledby="chuva-monitorada-titulo">
+          <p class="selo-tipo-dado selo-observacao-visual">Dados das estações</p>
+          <h2 id="chuva-monitorada-titulo">Chuva monitorada</h2>
+          <p>Precipitação registrada pelas quatro estações de monitoramento.</p>
+          <dl id="lista-chuva-monitorada" class="lista-chuvas" aria-live="polite">
+            <div>
+              <dt>Carregando estações...</dt>
+              <dd>Consultando dados</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section id="chuva-prevista" aria-labelledby="chuva-prevista-titulo">
+          <p class="selo-tipo-dado">Previsão meteorológica</p>
+          <h2 id="chuva-prevista-titulo">Chuva prevista</h2>
+          <p id="chuva-prevista-status" aria-live="polite">
+            Previsão de chuva ainda não integrada.
+          </p>
+          <small>Consulte os avisos oficiais do INMET enquanto a previsão não estiver disponível.</small>
+        </section>
+      </div>
+
+      <section id="avisos-inmet" aria-labelledby="avisos-inmet-titulo">
+        <p class="selo-tipo-dado selo-aviso-oficial">Aviso meteorológico oficial</p>
+        <h2 id="avisos-inmet-titulo">Avisos do INMET para Agudo</h2>
+        <p id="avisos-inmet-status" aria-live="polite">Consultando avisos ativos...</p>
+        <div id="lista-avisos-inmet" class="lista-avisos-inmet"></div>
+        <p class="fonte-avisos-inmet">
+          Fonte:
+          <a href="https://avisos.inmet.gov.br/" target="_blank" rel="noopener noreferrer">
+            Instituto Nacional de Meteorologia (INMET)
+          </a>
         </p>
       </section>
 
@@ -211,37 +285,13 @@
 
         <dl class="resumo-estradas">
           <div id="desvio-agudo-dona-francisca" class="situacao-via">
-            <dt>Desvio entre Agudo e Dona Francisca</dt>
+            <dt>Sangrador / Desvio Agudo–Dona Francisca</dt>
             <dd
               id="situacao-desvio-agudo-dona-francisca"
               aria-live="polite"
             >
               Carregando...
             </dd>
-          </div>
-
-          <div id="estrada-geral-nova-boemia" class="situacao-via">
-            <dt>Estrada Geral para Nova Boêmia</dt>
-            <dd id="situacao-estrada-geral-nova-boemia">
-              Carregando...
-            </dd>
-          </div>
-
-          <div id="acesso-captacao-corsan" class="situacao-via">
-            <dt>Acesso à captação da Corsan</dt>
-            <dd id="situacao-acesso-captacao-corsan" aria-live="polite">
-              Carregando...
-            </dd>
-          </div>
-
-          <div>
-            <dt>Veículos de pequeno porte</dt>
-            <dd id="regra-pequeno-porte">Bloqueio simulado a partir de 7,00 m.</dd>
-          </div>
-
-          <div>
-            <dt>Veículos de grande porte</dt>
-            <dd id="regra-grande-porte">Bloqueio simulado acima de 7,50 m.</dd>
           </div>
 
           <div>
@@ -260,9 +310,9 @@
           </p>
 
           <p>
-            Neste protótipo, o resultado é calculado somente pelas regras
-            simuladas de nível. Ele não confirma as condições reais da via.
-            Fechamentos devem ser confirmados pelos órgãos responsáveis.
+            A cota de inundação de Dona Francisca é 7,5 m. A referência de
+            6,2 m indica bloqueio total do Sangrador para qualquer tipo de
+            veículo. Fechamentos devem ser confirmados pelos órgãos responsáveis.
           </p>
         </details>
 
@@ -278,8 +328,8 @@
         <p>
           Estações com sensores para acompanhamento hidrológico e
           meteorológico. A Estação 1 utiliza dados instrumentais da ANA. Os
-          cartões restantes continuam identificando dados simulados ou
-          indisponíveis.
+          cartões restantes indicam claramente quando a medição está
+          indisponível.
         </p>
 
         <div id="lista-estacoes" aria-live="polite">
@@ -303,7 +353,7 @@
           Acompanhamento feito por pessoas no local, sem sensor ou medição de
           nível em metros. A situação geral pode ser normal, atenção, alerta ou
           inundação. Uma descrição visual não substitui medição instrumental
-          nem constitui dado simulado.
+          nem substitui uma medição instrumental.
         </p>
 
         <div id="lista-observacoes-visuais" aria-live="polite">
@@ -320,8 +370,7 @@
 
         <p>
           Dados organizados da usina mais acima para a mais abaixo no curso do
-          rio. Os valores simulados não representam condições operacionais
-          reais.
+          rio. Integrações ainda não autorizadas aparecem sem valores.
         </p>
 
         <div id="lista-usinas" aria-live="polite">
@@ -333,8 +382,8 @@
         <h2 id="historico-titulo">Histórico do nível do rio</h2>
 
         <p>
-          Nas últimas seis horas, o nível aumentou 3 cm. Resultado calculado com
-          dados simulados.
+          O histórico será apresentado somente com medições instrumentais
+          obtidas das integrações oficiais.
         </p>
 
         <div aria-label="Selecionar período do histórico">
@@ -355,8 +404,8 @@
           </div>
 
           <figcaption>
-            Nível do Rio Jacuí nas últimas 24 horas. Dados simulados para
-            desenvolvimento.
+            Nível do Rio Jacuí nas últimas 24 horas. Aguardando série
+            instrumental para apresentação.
           </figcaption>
         </figure>
 
@@ -365,7 +414,7 @@
 
           <table>
             <caption>
-              Medições simuladas do nível do Rio Jacuí
+              Medições instrumentais do nível do Rio Jacuí
             </caption>
 
             <thead>
@@ -378,49 +427,13 @@
 
             <tbody>
               <tr>
-                <td>
-                  <time datetime="2026-08-06T04:45:00-03:00">
-                    6 de agosto, 04h45
-                  </time>
-                </td>
-                <td>6,17 m</td>
-                <td>Válido</td>
-              </tr>
-
-              <tr>
-                <td>
-                  <time datetime="2026-08-06T06:45:00-03:00">
-                    6 de agosto, 06h45
-                  </time>
-                </td>
-                <td>6,18 m</td>
-                <td>Válido</td>
-              </tr>
-
-              <tr>
-                <td>
-                  <time datetime="2026-08-06T08:45:00-03:00">
-                    6 de agosto, 08h45
-                  </time>
-                </td>
-                <td>Sem medição</td>
-                <td>Dado indisponível</td>
-              </tr>
-
-              <tr>
-                <td>
-                  <time datetime="2026-08-06T10:45:00-03:00">
-                    6 de agosto, 10h45
-                  </time>
-                </td>
-                <td>6,20 m</td>
-                <td>Válido</td>
+                <td colspan="3">Aguardando carregamento da série instrumental.</td>
               </tr>
             </tbody>
           </table>
         </details>
 
-        <p>Fonte: dados simulados para desenvolvimento.</p>
+        <p>Fonte: ANA HidroWebService.</p>
       </section>
 
       <section id="culturas" aria-labelledby="culturas-titulo">
@@ -560,13 +573,7 @@
                       </a>
                     </li>
                     
-                    <li>Kauã Souza | Desenvolvedor | <a
-                      href="https://www.linkedin.com/in/kau%C3%A3-souza-79a0551a5/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="LinkedIn de Kaua Souza"> LinkedIn </a>
-
-                    </li>
+                    <li>Nome do responsável 2</li>
                     <li>Nome do responsável 3</li>
                 </ul>
                 <a id="participar-colaboracao"

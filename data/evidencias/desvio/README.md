@@ -1,12 +1,13 @@
-# Evidências — Desvio
+# Evidências — Sangrador / Desvio Agudo–Dona Francisca
 
 ## Identificação do local
 
-Nome padronizado: Desvio
+Nome padronizado: Sangrador / Desvio Agudo–Dona Francisca
 
 Nomes alternativos encontrados:
 
 - Sangrador
+- Desvio Agudo–Dona Francisca
 - Desvio entre Agudo e Dona Chica
 - Desvio entre Agudo e Dona Francisca
 - Desvio Cerro Chato
@@ -18,7 +19,7 @@ Estação hidrológica de referência:
 ## Objetivo
 
 Registrar ocorrências de água sobre a via, restrição de circulação e
-interdição no local conhecido como Desvio.
+interdição no local conhecido como Sangrador / Desvio Agudo–Dona Francisca.
 
 As evidências não definem automaticamente uma cota oficial de bloqueio.
 Os horários devem ser posteriormente cruzados com os dados da estação

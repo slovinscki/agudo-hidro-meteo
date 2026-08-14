@@ -1,14 +1,28 @@
 const ANA_API_URL =
   "https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas";
+const CODIGO_ESTACAO_PADRAO = "85400000";
 
 const DURACAO_TOKEN_MS = 55 * 60 * 1000;
-const TIMEOUT_ANA_MS = 8000;
+const timeoutAnaConfigurado = Number(process.env.TIMEOUT_ANA_MS);
+const TIMEOUT_ANA_MS =
+  Number.isFinite(timeoutAnaConfigurado) && timeoutAnaConfigurado > 0
+    ? timeoutAnaConfigurado
+    : 45000;
 const TIMEOUT_BANCO_MS = 5000;
+const limiteDesatualizadoConfigurado = Number(
+  process.env.LIMITE_DADO_DESATUALIZADO_MINUTOS,
+);
+const LIMITE_DESATUALIZADO_MINUTOS =
+  Number.isFinite(limiteDesatualizadoConfigurado) &&
+  limiteDesatualizadoConfigurado > 0
+    ? limiteDesatualizadoConfigurado
+    : 60;
 
 const {
   bancoConfigurado,
   finalizarExecucaoColeta,
   iniciarExecucaoColeta,
+  obterAcumuladosChuvaAna,
   obterUltimasMedicoes,
   salvarMedicoesAna,
 } = require("../lib/repositorio-hidrologico");
@@ -98,7 +112,7 @@ async function autenticar({ forcarNovoToken = false } = {}) {
 }
 
 function criarUrlDaSerie() {
-  const codigoEstacao = obterVariavelObrigatoria("ANA_ESTACAO");
+  const codigoEstacao = process.env.ANA_ESTACAO || CODIGO_ESTACAO_PADRAO;
   const url = new URL(
     `${ANA_API_URL}/HidroinfoanaSerieTelemetricaAdotada/v1`,
   );
@@ -139,6 +153,29 @@ function encontrarMedicaoMaisRecente(medicoes) {
       ? medicao
       : maisRecente;
   }, null);
+}
+
+function normalizarDataAna(valor) {
+  if (!valor) return valor;
+
+  const texto = String(valor).trim();
+  const possuiFuso = /(?:Z|[+-]\d{2}:?\d{2})$/i.test(texto);
+  const textoIso = texto.replace(" ", "T");
+  const instante = new Date(possuiFuso ? textoIso : `${textoIso}-03:00`);
+
+  if (Number.isNaN(instante.getTime())) {
+    throw new Error(`Data inválida recebida da ANA: ${texto}`);
+  }
+
+  return instante.toISOString();
+}
+
+function normalizarDatasMedicaoAna(medicao) {
+  return {
+    ...medicao,
+    Data_Hora_Medicao: normalizarDataAna(medicao.Data_Hora_Medicao),
+    Data_Atualizacao: normalizarDataAna(medicao.Data_Atualizacao),
+  };
 }
 
 function calcularVariacaoNivel(medicoes, medicaoMaisRecente) {
@@ -201,7 +238,11 @@ function normalizarMedicao(medicao, variacaoNivel) {
   return {
     estacao: {
       id: "estacao-1",
-      codigo: String(medicao.codigoestacao ?? process.env.ANA_ESTACAO),
+      codigo: String(
+        medicao.codigoestacao ??
+          process.env.ANA_ESTACAO ??
+          CODIGO_ESTACAO_PADRAO,
+      ),
       nome: "Dona Francisca",
     },
     fonte: "ANA HidroWebService",
@@ -249,7 +290,7 @@ function converterMedicaoBanco(linha) {
 }
 
 async function coletarEPersistir({ persistir = true } = {}) {
-  const codigoEstacao = obterVariavelObrigatoria("ANA_ESTACAO");
+  const codigoEstacao = process.env.ANA_ESTACAO || CODIGO_ESTACAO_PADRAO;
   let execucaoId = null;
 
   try {
@@ -274,7 +315,9 @@ async function coletarEPersistir({ persistir = true } = {}) {
     }
 
     const dados = await respostaAna.json();
-    const medicoes = Array.isArray(dados?.items) ? dados.items : [];
+    const medicoes = Array.isArray(dados?.items)
+      ? dados.items.map(normalizarDatasMedicaoAna)
+      : [];
     const medicaoMaisRecente = encontrarMedicaoMaisRecente(medicoes);
 
     if (!medicaoMaisRecente) {
@@ -331,12 +374,15 @@ async function coletarEPersistir({ persistir = true } = {}) {
   }
 }
 
-async function obterFallbackBanco() {
-  const codigoEstacao = process.env.ANA_ESTACAO;
-  if (!codigoEstacao || !bancoConfigurado()) return null;
+async function obterDadosBanco() {
+  const codigoEstacao = process.env.ANA_ESTACAO || CODIGO_ESTACAO_PADRAO;
+  if (!bancoConfigurado()) return null;
 
-  const linhas = await executarComTimeout(
-    obterUltimasMedicoes(codigoEstacao),
+  const [linhas, acumulados] = await executarComTimeout(
+    Promise.all([
+      obterUltimasMedicoes(codigoEstacao),
+      obterAcumuladosChuvaAna(codigoEstacao),
+    ]),
     TIMEOUT_BANCO_MS,
     "Consulta ao fallback do banco",
   );
@@ -347,14 +393,44 @@ async function obterFallbackBanco() {
   const variacaoNivel = calcularVariacaoNivel(medicoes, maisRecente);
   const dados = normalizarMedicao(maisRecente, variacaoNivel);
 
-  dados.fonte = "ANA — última medição armazenada";
+  dados.medicao.chuvaAcumulada = normalizarAcumuladosChuva(acumulados);
+
+  dados.fonte = "ANA — dado armazenado";
+  const medidoEmMs = new Date(dados.medicao.medidoEm).getTime();
+  const idadeMinutos = Number.isNaN(medidoEmMs)
+    ? null
+    : Math.max(0, (Date.now() - medidoEmMs) / (60 * 1000));
+  const desatualizado =
+    idadeMinutos === null || idadeMinutos > LIMITE_DESATUALIZADO_MINUTOS;
+
   dados.persistencia = {
-    fallback: true,
-    motivo: "Fonte ANA temporariamente indisponível",
+    origemLeitura: "banco",
+    fallback: false,
     recuperadoEm: new Date().toISOString(),
+    idadeMinutos,
+    limiteDesatualizadoMinutos: LIMITE_DESATUALIZADO_MINUTOS,
+    situacaoAtualizacao: desatualizado ? "desatualizado" : "atualizado",
   };
 
   return dados;
+}
+
+function normalizarAcumuladosChuva(acumulados) {
+  if (!acumulados?.referencia_em || !acumulados?.inicio_historico) return null;
+  const referencia = new Date(acumulados.referencia_em);
+  const inicio = new Date(acumulados.inicio_historico);
+  const item = (valor, minutos) => ({
+    valor: Number(valor),
+    unidade: "mm",
+    completo: inicio <= new Date(referencia.getTime() - minutos * 60000),
+  });
+  return {
+    referenciaEm: referencia.toISOString(),
+    ultimos30Min: item(acumulados.ultimos_30_min, 30),
+    ultimaHora: item(acumulados.ultima_hora, 60),
+    ultimas12Horas: item(acumulados.ultimas_12_horas, 12 * 60),
+    ultimas24Horas: item(acumulados.ultimas_24_horas, 24 * 60),
+  };
 }
 
 module.exports = async function handler(requisicao, resposta) {
@@ -366,32 +442,27 @@ module.exports = async function handler(requisicao, resposta) {
   try {
     resposta.setHeader(
       "Cache-Control",
-      "s-maxage=300, stale-while-revalidate=600",
+      "public, s-maxage=60, stale-while-revalidate=900, stale-if-error=86400",
     );
-    // A leitura pública não deve depender da disponibilidade do Neon. A
-    // persistência é executada pelo endpoint protegido da coleta agendada.
-    const resultado = await coletarEPersistir({ persistir: false });
-    return resposta.status(200).json({
-      ...resultado.dados,
-      persistencia: resultado.persistencia,
-    });
-  } catch (erro) {
-    console.error("Erro na integração com a ANA:", erro.message);
+    const dados = await obterDadosBanco();
 
-    try {
-      const fallback = await obterFallbackBanco();
-      if (fallback) {
-        resposta.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=300");
-        return resposta.status(200).json(fallback);
-      }
-    } catch (erroBanco) {
-      console.error("Erro ao consultar fallback do banco:", erroBanco.message);
+    if (!dados) {
+      resposta.setHeader("Cache-Control", "no-store");
+      return resposta.status(503).json({
+        erro: "Ainda não há medição armazenada no banco.",
+      });
     }
 
-    return resposta.status(502).json({
-      erro: "Não foi possível consultar os dados da ANA.",
+    return resposta.status(200).json(dados);
+  } catch (erro) {
+    console.error("Erro ao consultar medição armazenada:", erro.message);
+    resposta.setHeader("Cache-Control", "no-store");
+    return resposta.status(503).json({
+      erro: "Não foi possível consultar os dados armazenados.",
     });
   }
 };
 
 module.exports.coletarEPersistir = coletarEPersistir;
+module.exports.normalizarDataAna = normalizarDataAna;
+module.exports.obterDadosBanco = obterDadosBanco;

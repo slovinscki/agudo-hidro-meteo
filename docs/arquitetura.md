@@ -246,14 +246,10 @@ Ao final da página, deve aparecer um resumo curto:
 
 A primeira versão deve ter poucas opções:
 
-- Início;
-- Histórico;
-- Estações;
-- Metodologia e fontes;
-- Sobre o projeto.
+- Seja um colaborador;
+- Defesa Civil — canais oficiais.
 
-Em telas pequenas, a navegação pode ficar em um menu compacto, mas “Início” e
-“Canais oficiais” devem permanecer fáceis de encontrar.
+Em telas pequenas, as duas opções devem permanecer fáceis de encontrar.
 
 ======================================================================
 

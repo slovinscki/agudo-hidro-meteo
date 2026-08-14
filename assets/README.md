@@ -17,7 +17,8 @@ Município de Agudo.
 Horário da última atualização.
 
 Resumo da situação
-Situação geral: normal, atenção, alerta ou inundação.
+
+## Situação geral: normal, atenção, alerta ou inundação. (sempre usar esse tipo de dado para facilitar a visualização)
 Mensagem curta para a população.
 
 Nível hidrológico
@@ -107,3 +108,11 @@ Nosso primeiro marco será:
 Publicar uma página responsiva que permita entender a situação hidrológica de Agudo em menos de dez segundos.
 
 A próxima etapa será construir o Documento Zero do projeto, definindo problema, público, escopo do MVP e informações que aparecerão na primeira tela.
+
+
+## Participação e governança 10-08-2026
+
+O projeto possui participação aberta e permissões progressivas,
+de acordo com as responsabilidades assumidas por cada participante.
+
+Consulte [Governança do projeto](docs/governanca.md).

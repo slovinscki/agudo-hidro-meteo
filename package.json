@@ -6,9 +6,15 @@
     "node": ">=20"
   },
   "scripts": {
+    "local": "node scripts/servidor-desenvolvimento.js",
+    "collect:dev": "node scripts/coletor-desenvolvimento.js",
+    "collect:dev:watch": "node scripts/coletor-desenvolvimento.js --continuo",
     "db:migrate": "node scripts/migrate.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2"
+  },
+  "devDependencies": {
+    "vercel": "^58.11.0"
   }
 }

@@ -4,9 +4,9 @@ Proposta da tela inicial
 
 “Plataforma Hidrometeorológica de Agudo”
 Identificação: “Agudo, RS”
-Link destacado: “Canais oficiais”
-Menu: Início, Histórico, Estações, Metodologia e Sobre
-No celular, manter visíveis o nome da plataforma e o acesso aos canais oficiais; os demais itens ficam no menu.
+Item de menu: “Defesa Civil — canais oficiais”
+Menu: “Seja um colaborador” e “Defesa Civil — canais oficiais”
+No celular, manter visíveis o nome da plataforma e os dois itens do menu.
 
 # 2. Faixa de situação atual
 
@@ -81,7 +81,7 @@ A ordem recomendada é:
 Situação atual  
 Nível e tendência  
 Horário e status da medição  
-Canais oficiais  
+Canais oficiais da Defesa Civil
 Chuva observada  
 Previsão separada  
 Histórico simplificado  

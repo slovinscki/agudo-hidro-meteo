@@ -15,20 +15,14 @@
     ],
     "statusCadastro": "confirmada",
     "tipoMonitoramento": "instrumental",
-    "naturezaDado": "simulado",
-    "medicaoSimulada": {
-      "nivelRio": 6.2,
-      "unidade": "m",
-      "cotaReferencia": 7.0,
-      "medidoEm": "2026-08-07T14:30:00-03:00"
-    },
+    "naturezaDado": "instrumental",
     "observacoes": "Estação de referência para os dados hidrológicos da ANA."
   },
   {
     "id": "estacao-2",
     "ordem": 2,
-    "nome": "Porto Agudo",
-    "local": "Porto Agudo",
+    "nome": "Porto Agudo/Jacuí s/n",
+    "local": "Porto Agudo/Jacuí s/n",
     "tipo": "meteorologica",
     "posicionadaEmRio": true,
     "fonte": "Plugfield",
@@ -37,18 +31,29 @@
     "fabricanteHardware": "Plugfield",
     "provedorSoftware": "Plugfield",
     "fonteTecnicaDados": "Plugfield",
-    "codigoExterno": null,
-    "variaveisEsperadas": [],
+    "codigoExterno": "1942",
+    "idPlataforma": "10595",
+    "variaveisEsperadas": [
+      "temperatura",
+      "sensacao_termica",
+      "ponto_orvalho",
+      "umidade",
+      "vento_velocidade",
+      "vento_rajada",
+      "vento_direcao",
+      "chuva_acumulada",
+      "pressao_absoluta",
+      "pressao_relativa",
+      "indice_uv",
+      "luminosidade",
+      "radiacao_solar",
+      "bateria",
+      "sinal_wifi"
+    ],
     "statusCadastro": "local_confirmado",
     "tipoMonitoramento": "instrumental",
-    "naturezaDado": "simulado",
-    "medicaoSimulada": {
-      "nivelRio": 5.8,
-      "unidade": "m",
-      "cotaReferencia": 6.5,
-      "medidoEm": "2026-08-07T14:30:00-03:00"
-    },
-    "observacoes": "Estação da Prefeitura Municipal de Agudo com hardware e software da Plugfield. Código da estação e sensores disponíveis ainda precisam ser confirmados."
+    "naturezaDado": "indisponivel",
+    "observacoes": "Estação da Prefeitura Municipal de Agudo com hardware e software da Plugfield. Código externo 1942 e ID interno da plataforma 10595 confirmados."
   },
   {
     "id": "estacao-3",
@@ -67,13 +72,7 @@
     "variaveisEsperadas": [],
     "statusCadastro": "local_confirmado",
     "tipoMonitoramento": "instrumental",
-    "naturezaDado": "simulado",
-    "medicaoSimulada": {
-      "nivelRio": 7.1,
-      "unidade": "m",
-      "cotaReferencia": 7.0,
-      "medidoEm": "2026-08-07T14:30:00-03:00"
-    },
+    "naturezaDado": "indisponivel",
     "observacoes": "Estação da Prefeitura Municipal de Agudo com hardware e software da Plugfield. Código da estação e sensores disponíveis ainda precisam ser confirmados."
   },
   {
@@ -94,7 +93,6 @@
     "statusCadastro": "local_confirmado",
     "tipoMonitoramento": "instrumental",
     "naturezaDado": "indisponivel",
-    "medicaoSimulada": null,
     "observacoes": "Estação da Prefeitura Municipal de Agudo com hardware e software da Plugfield. Instalada na Escola Santo Antônio, em Pomeranos, sem posicionamento em rio. Código da estação e sensores ainda precisam ser confirmados."
   },
   {
@@ -113,7 +111,6 @@
       "aspecto_visual"
     ],
     "statusCadastro": "pendente",
-    "medicaoSimulada": null,
     "observacaoVisual": null,
     "regrasSituacaoVisual": {
       "normal": "Água dentro do leito, sem aproximação das pontes.",
@@ -121,13 +118,7 @@
       "alerta": "Água atingindo estruturas das pontes ou áreas próximas.",
       "inundacao": "Água sobre ponte, via ou fora do leito."
     },
-    "pontes": [
-      { "id": "corupa-ponte-1", "nome": "Ponte 1", "situacaoTravessia": "transponivel", "dadoSimulado": true },
-      { "id": "corupa-ponte-2", "nome": "Ponte 2", "situacaoTravessia": "cuidado", "dadoSimulado": true },
-      { "id": "corupa-ponte-3", "nome": "Ponte 3", "situacaoTravessia": "intransponivel", "dadoSimulado": true },
-      { "id": "corupa-ponte-4", "nome": "Ponte 4", "situacaoTravessia": "transponivel", "dadoSimulado": true },
-      { "id": "corupa-ponte-5", "nome": "Ponte 5", "situacaoTravessia": "cuidado", "dadoSimulado": true }
-    ],
+    "pontes": [],
     "desaguaEm": "Rio Jacuí",
     "infraestruturaAssociada": "Diversas pontes ao longo do arroio",
     "observacoes": "Arroio acompanhado somente por observações visuais. Localização dos pontos de observação, responsável e primeira observação ainda precisam ser confirmados."
@@ -148,7 +139,6 @@
       "aspecto_visual"
     ],
     "statusCadastro": "pendente",
-    "medicaoSimulada": null,
     "observacaoVisual": null,
     "regrasSituacaoVisual": {
       "normal": "Água dentro do leito, sem aproximação das pontes.",
@@ -156,13 +146,7 @@
       "alerta": "Água atingindo estruturas das pontes ou áreas próximas.",
       "inundacao": "Água sobre ponte, via ou fora do leito."
     },
-    "pontes": [
-      { "id": "hermes-ponte-1", "nome": "Ponte 1", "situacaoTravessia": "intransponivel", "dadoSimulado": true },
-      { "id": "hermes-ponte-2", "nome": "Ponte 2", "situacaoTravessia": "cuidado", "dadoSimulado": true },
-      { "id": "hermes-ponte-3", "nome": "Ponte 3", "situacaoTravessia": "transponivel", "dadoSimulado": true },
-      { "id": "hermes-ponte-4", "nome": "Ponte 4", "situacaoTravessia": "intransponivel", "dadoSimulado": true },
-      { "id": "hermes-ponte-5", "nome": "Ponte 5", "situacaoTravessia": "transponivel", "dadoSimulado": true }
-    ],
+    "pontes": [],
     "desaguaEm": "Rio Jacuí",
     "infraestruturaAssociada": "Diversas pontes ao longo do arroio",
     "observacoes": "Arroio acompanhado somente por observações visuais. Localização dos pontos de observação, responsável e primeira observação ainda precisam ser confirmados."

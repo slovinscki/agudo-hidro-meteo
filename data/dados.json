@@ -2,98 +2,68 @@
   "estacao": {
     "id": "estacao-1",
     "nome": "Dona Francisca",
-    "fonte": "Dados simulados para desenvolvimento"
+    "fonte": "ANA HidroWebService"
   },
   "medicao": {
-    "nivelRio": 6.2,
-    "unidadeNivel": "m",
-    "tendencia": "Subindo lentamente",
     "taxaVariacaoCmHora": null,
     "cotaInundacao": 7.5,
-    "precipitacao24h": 12.4,
-    "unidadePrecipitacao": "mm",
-    "medidoEm": "2026-08-07T14:30:00-03:00",  
-    "status": "Provisório — dados de teste"
+    "cotaBloqueioSangrador": 6.2
   },
   "usinas": [
     {
       "id": "usina-passo-real",
       "ordem": 1,
       "nome": "UHE Passo Real",
-      "tipo": "Dados fictícios para simulação",
-      "fonte": "Simulação do projeto",
+      "tipo": "Aguardando acesso à API oficial",
+      "fonte": "Não integrada",
       "urlFonte": null,
-      "atualizadoEm": "2026-08-07T14:00:00-03:00",
-      "nivelReservatorio": 326.8,
-      "nivelJusante": 285.4,
-      "afluencia": 410.0,
-      "defluencia": 380.0,
-      "defluenciaReferenciaSimulada": 350.0,
+      "atualizadoEm": null,
+      "nivelReservatorio": null,
+      "nivelJusante": null,
+      "afluencia": null,
+      "defluencia": null,
       "unidadeNivel": "m",
-      "unidadeVazao": "m³/s",
-      "limiteJusanteSimulado": null
+      "unidadeVazao": "m³/s"
     },
     {
       "id": "usina-itauba",
       "ordem": 2,
       "nome": "UHE Itaúba",
-      "tipo": "Dados fictícios para simulação",
-      "fonte": "Simulação do projeto",
+      "tipo": "Aguardando acesso à API oficial",
+      "fonte": "Não integrada",
       "urlFonte": null,
-      "atualizadoEm": "2026-08-07T14:00:00-03:00",
-      "nivelReservatorio": 196.4,
-      "nivelJusante": 132.8,
-      "afluencia": 650.0,
-      "defluencia": 620.0,
-      "defluenciaReferenciaSimulada": 600.0,
+      "atualizadoEm": null,
+      "nivelReservatorio": null,
+      "nivelJusante": null,
+      "afluencia": null,
+      "defluencia": null,
       "unidadeNivel": "m",
-      "unidadeVazao": "m³/s",
-      "limiteJusanteSimulado": null
+      "unidadeVazao": "m³/s"
     },
     {
       "id": "usina-dona-francisca",
       "ordem": 3,
       "nome": "UHE Dona Francisca",
-      "tipo": "Dados de referência para simulação",
+      "tipo": "Dados horários da página pública da DFESA",
       "fonte": "DFESA — Status Hidrologia",
       "urlFonte": "https://www.dfesa.com.br/status/",
-      "atualizadoEm": "2026-08-07T14:00:00-03:00",
-      "nivelReservatorio": 95.57,
-      "nivelJusante": 56.71,
-      "afluencia": 1233.0,
-      "defluencia": 1018.0,
-      "defluenciaReferenciaSimulada": 1100.0,
+      "atualizadoEm": null,
+      "nivelReservatorio": null,
+      "nivelJusante": null,
+      "afluencia": null,
+      "defluencia": null,
       "unidadeNivel": "m",
-      "unidadeVazao": "m³/s",
-      "limiteJusanteSimulado": null
+      "unidadeVazao": "m³/s"
     }
   ],
   "impactoEstradas": [
     {
       "id": "desvio-agudo-dona-francisca",
-      "via": "Desvio entre Agudo e Dona Francisca",
-      "estacaoReferencia": "estacao-1",
-      "tipoRegra": "bloqueio_por_porte",
-      "limitePequenoPorte": 7.0,
-      "limiteGrandePorte": 7.5,
-      "fonte": "Regras simuladas para desenvolvimento"
-    },
-    {
-      "id": "estrada-geral-nova-boemia",
-      "via": "Estrada Geral para Nova Boêmia",
-      "estacaoReferencia": "estacao-1",
-      "tipoRegra": "bloqueio_por_porte",
-      "limitePequenoPorte": 7.0,
-      "limiteGrandePorte": 7.5,
-      "fonte": "Regras simuladas para desenvolvimento"
-    },
-    {
-      "id": "acesso-captacao-corsan",
-      "via": "Acesso à captação da Corsan",
+      "via": "Sangrador / Desvio Agudo–Dona Francisca",
       "estacaoReferencia": "estacao-1",
       "tipoRegra": "bloqueio_total",
-      "limiteBloqueio": 5.5,
-      "fonte": "Regra simulada para desenvolvimento"
+      "limiteBloqueio": 6.2,
+      "fonte": "Referência empírica baseada em ocorrências publicadas por Enagio Mattje"
     }
   ]
 }

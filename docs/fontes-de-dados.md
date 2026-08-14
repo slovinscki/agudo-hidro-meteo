@@ -1,6 +1,7 @@
 REGRAS DE DADOS — PLATAFORMA HIDROMETEOROLÓGICA DE AGUDO
 
 Versão inicial: 06/08/2026
+Inventário de dados atualizado em: 13/08/2026
 
 OBJETIVO
 
@@ -50,6 +51,183 @@ vazão ou classificação calculada que não tenham sido medidos.
 RD-008B — A interface deve identificar explicitamente três naturezas distintas:
 observação visual feita por pessoa, medição instrumental obtida por sensor e
 dado simulado usado no desenvolvimento.
+
+----------------------------------------------------------------------
+
+1.1. INVENTÁRIO DAS INTEGRAÇÕES EM OPERAÇÃO
+
+Data de referência deste inventário: 13/08/2026.
+
+Esta data representa o momento em que a disponibilidade descrita abaixo foi
+registrada na documentação. Alterações futuras nas fontes, estações, sensores,
+campos ou cálculos devem gerar uma nova entrada no histórico da seção 1.2, sem
+apagar os registros anteriores.
+
+ANA — ESTAÇÃO 1, DONA FRANCISCA
+
+A integração consulta a estação hidrológica Dona Francisca, código 85400000,
+por meio do HidroWebService da ANA. O sistema recebe e preserva:
+
+- nível do rio (cota adotada), originalmente em centímetros e normalizado para
+  metros;
+- precipitação observada, em milímetros;
+- vazão, em metros cúbicos por segundo (m³/s);
+- data e hora da medição;
+- data e hora de atualização informada pela ANA;
+- qualidade do nível;
+- qualidade da precipitação;
+- qualidade da vazão;
+- código, nome e fonte da estação.
+
+A partir da série histórica válida da própria estação, o sistema calcula:
+
+- taxa de variação do nível, em centímetros por hora;
+- tendência do nível: subindo, estável ou baixando;
+- janela temporal usada no cálculo;
+- data e hora da medição de referência da variação.
+
+O sistema também acrescenta metadados de operação para informar a origem da
+leitura, a idade da medição e sua situação de atualização. Tendência, taxa de
+variação, idade e situação de atualização são informações calculadas pelo
+sistema e não medições fornecidas diretamente pela ANA.
+
+DFESA — UHE DONA FRANCISCA
+
+A integração consulta a página pública de Hidrologia da DFESA. Não foi
+identificada uma API pública documentada: as séries horárias são extraídas do
+objeto estruturado `chart_vars`, incorporado ao HTML da página. Por isso, a
+integração deve ser monitorada e pode precisar de manutenção caso a estrutura
+da página seja alterada.
+
+O sistema recebe e preserva:
+
+- nível do reservatório, em metros;
+- afluência, em metros cúbicos por segundo (m³/s);
+- vazão turbinada e vazão vertida, em m³/s;
+- defluência total, em m³/s;
+- nível de jusante, em metros;
+- chuva e percentual de volume útil publicados pela fonte;
+- data e hora de cada medição;
+- histórico horário disponível na página.
+
+Afluência é a água que chega ao reservatório. Defluência é a água que sai da
+usina pelas turbinas, vertedouro e demais descargas. A diferença `afluência −
+defluência` é usada somente como indicador simplificado da tendência de
+armazenamento: positiva sugere aumento, negativa sugere redução e valores
+próximos de zero sugerem estabilidade. Ela não substitui o balanço hídrico
+oficial, que pode incluir chuva direta, evaporação, contribuições laterais e
+outras perdas ou retiradas.
+
+Para o rio a jusante, a defluência é a variável da usina com efeito direto mais
+imediato. O nível observado em Agudo também depende do tempo de propagação,
+geometria da calha, afluentes locais, chuva, remanso e condições anteriores do
+rio; portanto, não existe conversão universal de m³/s para metros.
+
+O Boletim Rio Jacuí da Defesa Civil de Agudo, de 14/08/2026 às 07:00, informa
+as referências de vazão de 3.000 m³/s para atenção e 3.500 m³/s para inundação.
+O sistema as aplica provisoriamente à defluência para avaliar o trecho a
+jusante. Esses valores são limites operacionais de vazão, não cotas da régua,
+níveis do reservatório ou limites estruturais da barragem. A associação com a
+defluência deve ser confirmada formalmente com a Defesa Civil ou a DFESA.
+
+PLUGFIELD — ESTAÇÃO 2, PORTO AGUDO/JACUÍ
+
+A integração consulta o dispositivo interno 10595, código externo 1942, da
+estação meteorológica de Porto Agudo/Jacuí. O snapshot recebido pode conter:
+
+- temperatura do ar, em graus Celsius;
+- sensação térmica, em graus Celsius;
+- ponto de orvalho, em graus Celsius;
+- Delta T, em graus Celsius;
+- umidade relativa, em percentual;
+- velocidade do vento, em quilômetros por hora;
+- velocidade das rajadas, em quilômetros por hora;
+- direção do vento, em graus;
+- chuva acumulada no intervalo da leitura, em milímetros;
+- chuva acumulada no dia, em milímetros;
+- pressão atmosférica absoluta, em hectopascais;
+- pressão atmosférica relativa, em hectopascais;
+- luminosidade, em lux;
+- índice ultravioleta (UV);
+- radiação solar, em watts por metro quadrado;
+- nível da bateria, em percentual;
+- qualidade do sinal Wi-Fi, em percentual;
+- data e hora da medição;
+- identificador e número de série do dispositivo;
+- fuso horário e intervalo de atualização configurados no equipamento;
+- lista original de sensores e valores, preservada para auditoria.
+
+O sistema acrescenta a idade da medição e a situação de atualização. Esses dois
+campos são calculados localmente e não são sensores da Plugfield. Bateria e
+sinal Wi-Fi são dados operacionais usados para diagnosticar alimentação,
+conectividade e possíveis interrupções de coleta.
+
+A integração Plugfield da Estação 2 não fornece nível do rio. Nenhum valor de
+nível simulado ou cadastrado para desenvolvimento pode ser apresentado como
+medição instrumental dessa estação.
+
+SITUAÇÃO OPERACIONAL DA ESTAÇÃO 2
+
+Em 13/08/2026, a Defesa Civil informou que o medidor da Estação 2 precisa ser
+calibrado e que, por esse motivo, a estação não está enviando novas medições.
+Enquanto durar a calibração:
+
+- a estação deve ser identificada como “em manutenção — medidor em calibração”;
+- a ausência de novas leituras não deve ser interpretada como ausência de
+  chuva, vento forte ou risco;
+- a última medição válida pode permanecer no histórico, sempre acompanhada de
+  sua data, hora e aviso de desatualização;
+- valores simulados não devem substituir as medições ausentes;
+- a retomada da publicação de dados atuais depende da conclusão da calibração e
+  da validação das novas leituras.
+
+----------------------------------------------------------------------
+
+1.2. HISTÓRICO DE DISPONIBILIDADE DAS INFORMAÇÕES
+
+Cada mudança deve registrar a data, a fonte ou estação afetada, os dados
+adicionados, removidos ou temporariamente indisponíveis, a classificação da
+mudança e sua origem. Para este histórico:
+
+- upgrade: inclusão de uma nova variável, fonte, estação, metadado ou melhoria
+  de qualidade, frequência ou confiabilidade;
+- downgrade: remoção de uma variável ou redução de qualidade, frequência,
+  confiabilidade ou cobertura;
+- indisponibilidade temporária: interrupção que não representa remoção
+  definitiva da integração;
+- restabelecimento: retomada de uma informação anteriormente indisponível.
+
+### 13/08/2026 — Criação do inventário de dados disponíveis
+
+- Classificação: registro inicial.
+- ANA — Estação 1: documentados nível do rio, precipitação, vazão, horários,
+  indicadores de qualidade e os cálculos derivados de variação e tendência.
+- Plugfield — Estação 2: documentados os dados meteorológicos, ambientais,
+  operacionais e metadados do dispositivo descritos na seção 1.1.
+- Origem da informação: integrações e estruturas de persistência implementadas
+  no projeto.
+
+### 13/08/2026 — Interrupção das medições da Estação 2
+
+- Classificação: indisponibilidade temporária, não downgrade definitivo.
+- Dados afetados: todas as novas medições fornecidas pelo dispositivo
+  Plugfield da Estação 2.
+- Motivo: medidor precisa ser calibrado.
+- Origem da informação: Defesa Civil.
+- Situação: em manutenção, aguardando calibração e validação das novas leituras.
+- Dados históricos: preservados, com data, hora e indicação de desatualização.
+
+### 14/08/2026 — Integração da hidrologia da UHE Dona Francisca
+
+- Classificação: upgrade.
+- Fonte: página pública de Hidrologia da DFESA.
+- Dados adicionados: reservatório, jusante, afluência, vazões turbinada e
+  vertida, defluência, chuva, volume útil e histórico horário.
+- Cálculo derivado: balanço simplificado `afluência − defluência`.
+- Referências operacionais provisórias: atenção em 3.000 m³/s e inundação em
+  3.500 m³/s, conforme Boletim Rio Jacuí da Defesa Civil de Agudo.
+- Limitação: a fonte não oferece API pública documentada; os dados estruturados
+  são incorporados ao HTML da página.
 
 ======================================================================
 
@@ -356,7 +534,15 @@ Portal oficial:
 https://portal.inmet.gov.br/
 
 Alertas meteorológicos oficiais:
-https://alertas2.inmet.gov.br/
+https://avisos.inmet.gov.br/
+
+Integração de avisos ativos (JSON, sem autenticação):
+https://apiprevmet3.inmet.gov.br/avisos/ativos
+
+A aplicação consulta os avisos no backend, identifica Agudo pelo código IBGE
+4300109 e publica somente os avisos em cuja lista de municípios esse código
+aparece. A consulta usa cache de cinco minutos e não transforma previsão ou
+medição local em alerta oficial.
 
 DEFESA CIVIL DO RIO GRANDE DO SUL
 

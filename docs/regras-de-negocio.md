@@ -64,6 +64,10 @@ RN-020 — O sistema nunca deve apresentar um dado antigo como se fosse uma leit
 
 RN-021 — Quando uma fonte estiver indisponível, a última medição poderá continuar visível, desde que seu horário e o aviso de desatualização sejam destacados.
 
+RN-021-A — A área pública de situação atual deve ler medições persistidas no banco de dados e provenientes de fontes confiáveis. Dados simulados ou arquivos locais não podem substituir uma medição instrumental ausente.
+
+RN-021-B — A indisponibilidade temporária da fonte externa não deve apagar a última medição válida armazenada. Se ela ultrapassar o intervalo de atualização configurado, deve permanecer acompanhada do status “desatualizado” e do horário original.
+
 ----------------------------------------------------------------
 
 5. CLASSIFICAÇÃO HIDROLÓGICA
@@ -84,7 +88,7 @@ RN-024 — As cores não devem ser o único recurso utilizado para representar a
 
 RN-025 — Quando não existir uma cota oficial cadastrada, o sistema deve exibir apenas a medição, sem classificar o local como normal, atenção, alerta ou inundação.
 
-RN-026 — A cota de inundação de 7,5 metros mencionada para o rio Jacuí somente deverá ser usada no ponto correspondente e após a fonte oficial ser documentada.
+RN-026 — A cota oficial de inundação de Dona Francisca é 7,5 metros e indica o início da inundação do parque da cidade. A referência de 6,2 metros pertence ao Sangrador / Desvio Agudo–Dona Francisca e indica bloqueio total para qualquer tipo de veículo. As duas referências não devem ser tratadas como a mesma cota.
 
 ----------------------------------------------------------------
 
@@ -97,6 +101,26 @@ RN-028 — O sistema deve informar claramente qual cota está sendo usada no cá
 RN-029 — Um percentual acima de 100% significa que a respectiva cota foi ultrapassada.
 
 RN-030 — O percentual não substitui a apresentação do nível real em metros.
+
+RN-030-A — A barra de percentual usa 7,5 metros como 100%, correspondente à
+cota oficial de inundação de Dona Francisca. A cor deve usar, nesta ordem de
+prioridade:
+
+- vermelho a partir de 6,2 metros, devido ao bloqueio total do Sangrador;
+- amarelo a partir de 90% da cota oficial, quando ainda não houver bloqueio;
+- verde abaixo dessas referências;
+- cinza quando a medição estiver indisponível.
+
+RN-030-B — O tempo estimado até a cota deve ser exibido somente em horas quando
+for inferior a 30 horas. A partir de 30 horas, deve ser exibido em dias e horas.
+
+RN-030-C — A projeção deve calcular e identificar separadamente o tempo para:
+
+- 6,2 metros: bloqueio total do Sangrador para qualquer tipo de veículo;
+- 7,5 metros: início da inundação do parque da cidade em Dona Francisca.
+
+Quando uma referência já tiver sido atingida, o sistema deve apresentar o
+efeito correspondente em lugar de um tempo restante.
 
 Exemplo:
 
