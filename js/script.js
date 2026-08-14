@@ -547,67 +547,59 @@ function criarLinhaChuva(estacao, dadosAna = null, dadosPlugfield = null) {
   const nome = document.createElement("dt");
   const valor = document.createElement("dd");
   const codigo = String(estacao.codigoExterno ?? "");
-  let precipitacao = null;
-  let unidade = "mm";
+  let ultimaMedicao = null;
+  let acumuladoDia = null;
   let medidoEm = null;
-  let acumulados = null;
-  let rotuloMedida = "Na última medição";
 
   if (estacao.id === "estacao-1") {
-    precipitacao = dadosAna?.medicao?.precipitacao?.valor;
-    unidade = dadosAna?.medicao?.precipitacao?.unidade ?? unidade;
+    ultimaMedicao = dadosAna?.medicao?.precipitacao;
+    acumuladoDia = dadosAna?.medicao?.chuvaAcumulada?.acumuladoDia;
     medidoEm = dadosAna?.medicao?.medidoEm;
-    acumulados = dadosAna?.medicao?.chuvaAcumulada;
   } else if (
     dadosPlugfield &&
     codigo &&
     codigo === String(dadosPlugfield.estacao?.codigo ?? "")
   ) {
-    precipitacao = dadosPlugfield.medicao?.chuvaDia?.valor;
-    unidade = dadosPlugfield.medicao?.chuvaDia?.unidade ?? unidade;
+    ultimaMedicao = dadosPlugfield.medicao?.chuvaIntervalo;
+    acumuladoDia = dadosPlugfield.medicao?.chuvaDia;
     medidoEm = dadosPlugfield.medicao?.medidoEm;
-    acumulados = dadosPlugfield.medicao?.chuvaAcumulada;
-    rotuloMedida = "Acumulado do dia";
   }
 
   nome.textContent = `Estação ${estacao.ordem} — ${estacao.nome}`;
-  if (typeof precipitacao === "number") {
+  const criarBloco = (rotulo, dado) => {
+    const bloco = document.createElement("div");
+    const titulo = document.createElement("span");
     const medida = document.createElement("strong");
-    const rotulo = document.createElement("span");
-    const horario = document.createElement("small");
-    rotulo.className = "chuva-medida-rotulo";
-    rotulo.textContent = rotuloMedida;
-    medida.textContent = `${formatarNumero(precipitacao)} ${unidade}`;
-    horario.textContent = medidoEm
-      ? `Atualizado em ${formatarData(medidoEm)}`
-      : "Horário não informado";
-    valor.append(rotulo, medida, horario);
+    bloco.className = "chuva-campo";
+    titulo.className = "chuva-medida-rotulo";
+    titulo.textContent = rotulo;
+    medida.textContent =
+      typeof dado?.valor === "number"
+        ? `${formatarNumero(dado.valor)} ${dado.unidade ?? "mm"}`
+        : "Indisponível";
+    if (typeof dado?.valor !== "number") bloco.dataset.estado = "indisponivel";
+    bloco.append(titulo, medida);
+    return bloco;
+  };
 
-    if (acumulados) {
-      const listaAcumulados = document.createElement("dl");
-      const periodos = [
-        ["Últimos 30 min", acumulados.ultimos30Min],
-        ["Última hora", acumulados.ultimaHora],
-        ["Últimas 12 horas", acumulados.ultimas12Horas],
-        ["Últimas 24 horas", acumulados.ultimas24Horas],
-      ];
-      listaAcumulados.className = "chuva-acumulados";
-      periodos.forEach(([periodo, acumulado]) => {
-        const grupo = document.createElement("div");
-        const termo = document.createElement("dt");
-        const descricao = document.createElement("dd");
-        termo.textContent = periodo;
-        descricao.textContent = acumulado?.completo
-          ? `${formatarNumero(acumulado.valor)} ${acumulado.unidade}`
-          : "Histórico insuficiente";
-        grupo.append(termo, descricao);
-        listaAcumulados.append(grupo);
-      });
-      valor.append(listaAcumulados);
-    }
+  const campos = document.createElement("div");
+  const horario = document.createElement("small");
+  campos.className = "chuva-campos";
+  campos.append(
+    criarBloco("Última medição", ultimaMedicao),
+    criarBloco("Acumulado do dia", acumuladoDia),
+  );
+  horario.textContent = medidoEm
+    ? `Atualizado em ${formatarData(medidoEm)}`
+    : "Horário não informado";
+  valor.append(campos, horario);
+
+  if (
+    typeof ultimaMedicao?.valor === "number" ||
+    typeof acumuladoDia?.valor === "number"
+  ) {
     linha.dataset.estado = "disponivel";
   } else {
-    valor.textContent = "Dados de chuva indisponíveis";
     linha.dataset.estado = "indisponivel";
   }
 

@@ -1063,32 +1063,26 @@ th {
   text-transform: uppercase;
 }
 
-.chuva-acumulados {
+.chuva-campos {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--espaco-2);
   width: 100%;
-  margin: var(--espaco-3) 0 0;
   text-align: left;
 }
 
-.chuva-acumulados > div {
+.chuva-campo {
+  display: grid;
+  gap: 0.2rem;
   padding: var(--espaco-2);
   border: 0.0625rem solid var(--cor-borda);
   border-radius: calc(var(--raio) * 0.7);
   background: var(--cor-superficie-elevada);
 }
 
-.chuva-acumulados dt {
-  color: var(--cor-texto-secundario);
-  font-size: 0.68rem;
-}
-
-.chuva-acumulados dd {
-  margin: 0.15rem 0 0;
-  color: var(--cor-texto);
-  font-size: 0.82rem;
-  font-weight: 750;
+.chuva-campo[data-estado="indisponivel"] strong {
+  color: var(--cor-aviso);
+  font-size: 0.9rem;
 }
 
 .lista-chuvas div[data-estado="indisponivel"] dd {
@@ -1579,10 +1573,6 @@ footer p {
 
   .lista-chuvas > div {
     grid-template-columns: minmax(16rem, 0.7fr) minmax(38rem, 1.3fr);
-  }
-
-  .chuva-acumulados {
-    grid-template-columns: repeat(4, minmax(8rem, 1fr));
   }
 
   .lista-avisos-inmet,

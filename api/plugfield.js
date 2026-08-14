@@ -232,6 +232,10 @@ function normalizarAcumuladosChuva(acumulados) {
   });
   return {
     referenciaEm: referencia.toISOString(),
+    acumuladoDia: {
+      valor: numero(acumulados.acumulado_dia),
+      unidade: "mm",
+    },
     ultimos30Min: item(acumulados.ultimos_30_min, 30),
     ultimaHora: item(acumulados.ultima_hora, 60),
     ultimas12Horas: item(acumulados.ultimas_12_horas, 12 * 60),
