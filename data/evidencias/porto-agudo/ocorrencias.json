@@ -10,10 +10,9 @@
     "situacao": "passagem_confirmada",
     "descricao": "Água do Rio Jacuí chegando à estrada, mas ainda havia passagem.",
     "fonte": {
-      "autor": "Enagio Mattje",
       "instituicao": null,
       "tipo": "publicacao_facebook",
-      "url": "https://www.facebook.com/enagio.mattje.2025/posts/122155270328414369"
+      "url": null
     },
     "estacaoReferencia": "85400000",
     "nivelRioMetros": null,
@@ -31,10 +30,9 @@
     "situacao": "bloqueio_confirmado",
     "descricao": "Porto Agudo interditado, com rota opcional pela Linha Teotônia.",
     "fonte": {
-      "autor": "Enagio Mattje",
       "instituicao": null,
       "tipo": "publicacao_facebook",
-      "url": "https://www.facebook.com/enagio.mattje.2025/posts/122155283714414369"
+      "url": null
     },
     "estacaoReferencia": "85400000",
     "nivelRioMetros": null,

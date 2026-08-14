@@ -11,7 +11,6 @@
     "descricao": "Sangrador bloqueado.",
     "veiculosAfetados": [],
     "fonte": {
-      "autor": "Enagio Mattje",
       "instituicao": null,
       "tipo": "publicacao_facebook",
       "url": null
@@ -36,7 +35,6 @@
     "descricao": "Sangrador bloqueado.",
     "veiculosAfetados": [],
     "fonte": {
-      "autor": "Enagio Mattje",
       "instituicao": null,
       "tipo": "publicacao_facebook",
       "url": null
@@ -64,7 +62,6 @@
       "pesados"
     ],
     "fonte": {
-      "autor": "Enagio Mattje",
       "instituicao": null,
       "tipo": "video_facebook",
       "url": "https://www.facebook.com/share/r/18GCNyqGkh/"
@@ -89,10 +86,9 @@
     "descricao": "Sangrador bloqueado.",
     "veiculosAfetados": [],
     "fonte": {
-      "autor": "Enagio Mattje",
       "instituicao": null,
       "tipo": "publicacao_facebook",
-      "url": "https://www.facebook.com/enagio.mattje.2025/posts/122155274996414369"
+      "url": null
     },
     "estacaoReferencia": "85400000",
     "nivelRioMetros": null,
@@ -120,15 +116,13 @@
     ],
     "fontes": [
       {
-        "autor": "Enagio Mattje",
         "instituicao": null,
         "tipo": "foto_facebook",
         "referencia": "pfbid0Kk2G31rXS8ZSu29eLTmwCqqbe5sH5Ti3PhXnTvBk12NsY1YSHoGpsv8wyNLsfmzfl",
-        "url": "https://www.facebook.com/enagio.mattje.2025/posts/pfbid0Kk2G31rXS8ZSu29eLTmwCqqbe5sH5Ti3PhXnTvBk12NsY1YSHoGpsv8wyNLsfmzfl",
+        "url": null,
         "informacao": "Publicou uma foto informando ou mostrando que o desvio está bloqueado para veículos de qualquer porte."
       },
       {
-        "autor": "Edinho Lipke",
         "instituicao": "Secretaria Municipal de Obras",
         "funcao": "Secretário de Obras",
         "tipo": "fonte_institucional",
