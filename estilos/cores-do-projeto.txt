@@ -1,0 +1,33 @@
+CORES UTILIZADAS — PLATAFORMA HIDROMETEOROLÓGICA DE AGUDO
+
+Arquivo de referência criado a partir de css/style.css.
+
+CORES PRINCIPAIS
+
+#08090A — Fundo principal da página
+#121416 — Superfície dos cartões
+#191C1F — Superfície elevada e áreas internas
+#34383D — Bordas e divisórias
+#F5F7F8 — Texto principal
+#AEB6BD — Texto secundário
+
+CORES DE DESTAQUE
+
+#62E6FF — Azul-claro associado à água e aos dados principais
+#00B8D9 — Azul forte associado à água
+#D7FF45 — Lima para ações e destaques
+#FFCF4A — Amarelo para avisos e informações provisórias
+#FF5C5C — Vermelho para bloqueios de vias
+#FFFFFF — Branco para o contorno de foco
+
+CORES AUXILIARES
+
+#101417 — Tom escuro usado no gradiente da situação atual
+#111307 — Texto e fundo de contraste sobre a cor lima
+#061013 — Texto de contraste sobre o azul-claro
+
+Observação: o CSS também utiliza versões transparentes dessas cores por meio
+da notação rgb(), principalmente em gradientes, fundos e efeitos de destaque.
+
+
+## Qualquer dúvida, utilize o site https://coolors.co/colors como referência para combinação de cores.
