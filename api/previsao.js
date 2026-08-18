@@ -12,7 +12,7 @@ module.exports = async function handler(requisicao, resposta) {
     resposta.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=900");
     return resposta.status(200).json({
       ...previsao,
-      atualizacao: { idadeMinutos, situacao: idadeMinutos > 90 ? "desatualizada" : "atualizada" },
+      atualizacao: { idadeMinutos, situacao: idadeMinutos > 1500 ? "desatualizada" : "atualizada" },
     });
   } catch (erro) {
     console.error("Erro ao consultar previsão armazenada:", erro.message);
