@@ -5,6 +5,12 @@
     },
     "api/coleta-plugfield.js": {
       "maxDuration": 60
+    },
+    "api/coleta-previsao.js": {
+      "maxDuration": 60
     }
-  }
+  },
+  "crons": [
+    { "path": "/api/coleta-previsao", "schedule": "*/30 * * * *" }
+  ]
 }

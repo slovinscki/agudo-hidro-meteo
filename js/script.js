@@ -4,6 +4,7 @@ const CAMINHO_ANA = "/api/ana";
 const CAMINHO_INMET = "/api/inmet";
 const CAMINHO_PLUGFIELD = "/api/plugfield";
 const CAMINHO_DFESA = "/api/dfesa";
+const CAMINHO_PREVISAO = "/api/previsao";
 
 function formatarNumero(valor) {
   return valor.toLocaleString("pt-BR", {
@@ -92,6 +93,92 @@ async function carregarAvisosInmet() {
       "Avisos do INMET indisponíveis nesta consulta. Verifique o canal oficial.",
     );
     lista.replaceChildren();
+  }
+}
+
+function exibirTemperaturaCabecalho(dadosPlugfield) {
+  const temperatura = dadosPlugfield?.medicao?.temperatura?.valor;
+  if (typeof temperatura !== "number" || !Number.isFinite(temperatura)) return;
+  const temperaturaFormatada = temperatura.toLocaleString("pt-BR", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
+  atualizarTexto("cabecalho-local", `Agudo, RS · ${temperaturaFormatada} °C`);
+}
+
+function formatarValorPrevisao(valor, unidade) {
+  return typeof valor === "number"
+    ? `${formatarNumero(valor)} ${unidade}`
+    : "Não informado";
+}
+
+function criarCampoPrevisao(rotulo, valor) {
+  const campo = document.createElement("div");
+  const termo = document.createElement("dt");
+  const descricao = document.createElement("dd");
+  termo.textContent = rotulo;
+  descricao.textContent = valor;
+  campo.append(termo, descricao);
+  return campo;
+}
+
+function exibirPrevisao(dados) {
+  const resumo = dados.resumo24h;
+  const grade = document.querySelector("#chuva-prevista-resumo");
+  const horarios = document.querySelector("#chuva-prevista-horarios");
+  const fonte = document.querySelector("#chuva-prevista-fonte");
+  const status = dados.atualizacao?.situacao === "desatualizada"
+    ? "Previsão armazenada desatualizada. Consulte a emissão antes de usar."
+    : "Previsão horária para Agudo nas próximas 24 horas.";
+  atualizarTexto("chuva-prevista-status", status);
+
+  grade.replaceChildren(
+    criarCampoPrevisao("Chuva prevista", formatarValorPrevisao(resumo.precipitacaoMm, "mm")),
+    criarCampoPrevisao(
+      "Probabilidade máxima",
+      formatarValorPrevisao(resumo.probabilidadeMaximaPercentual, "%"),
+    ),
+    criarCampoPrevisao(
+      "Temperatura",
+      typeof resumo.temperaturaMinC === "number" && typeof resumo.temperaturaMaxC === "number"
+        ? `${formatarNumero(resumo.temperaturaMinC)} a ${formatarNumero(resumo.temperaturaMaxC)} °C`
+        : "Não informada",
+    ),
+    criarCampoPrevisao("Rajada máxima", formatarValorPrevisao(resumo.rajadaMaxKmh, "km/h")),
+  );
+
+  const proximasHoras = dados.horas.slice(0, 6).map((hora) => {
+    const item = document.createElement("li");
+    const horario = document.createElement("time");
+    const chuva = document.createElement("strong");
+    const probabilidade = document.createElement("span");
+    horario.dateTime = hora.horario;
+    horario.textContent = new Intl.DateTimeFormat("pt-BR", {
+      weekday: "short", hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo",
+    }).format(new Date(hora.horario));
+    chuva.textContent = formatarValorPrevisao(hora.precipitacaoMm, "mm");
+    probabilidade.textContent = typeof hora.probabilidadePrecipitacaoPercentual === "number"
+      ? `${formatarNumero(hora.probabilidadePrecipitacaoPercentual)}% de chance`
+      : "Probabilidade não informada";
+    item.append(horario, chuva, probabilidade);
+    return item;
+  });
+  horarios.replaceChildren(...proximasHoras);
+  fonte.href = dados.fonte.url;
+  fonte.textContent = `${dados.fonte.nome} — ${dados.modelo}`;
+  atualizarTexto("chuva-prevista-emissao", `Emitida em ${formatarData(dados.emitidoEm)}. Válida até ${formatarData(dados.fimEm)}.`);
+}
+
+async function carregarPrevisao() {
+  try {
+    const resposta = await fetch(CAMINHO_PREVISAO, { cache: "no-store" });
+    if (!resposta.ok) throw new Error(`Erro HTTP: ${resposta.status}`);
+    exibirPrevisao(await resposta.json());
+  } catch (erro) {
+    console.error("Não foi possível carregar a previsão:", erro);
+    atualizarTexto("chuva-prevista-status", "Previsão meteorológica indisponível nesta consulta.");
+    document.querySelector("#chuva-prevista-resumo")?.replaceChildren();
+    document.querySelector("#chuva-prevista-horarios")?.replaceChildren();
   }
 }
 
@@ -935,6 +1022,7 @@ async function carregarDados() {
       ? await respostaPlugfield.json()
       : null;
     const dadosDfesa = respostaDfesa?.ok ? await respostaDfesa.json() : null;
+    exibirTemperaturaCabecalho(dadosPlugfield);
     exibirDados(dados, dadosAna, dadosDfesa);
     await carregarEstacoes(dadosAna, dadosPlugfield);
   } catch (erro) {
@@ -945,3 +1033,4 @@ async function carregarDados() {
 
 carregarDados();
 carregarAvisosInmet();
+carregarPrevisao();

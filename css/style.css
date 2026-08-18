@@ -1093,6 +1093,67 @@ th {
   border-top: 0.25rem solid var(--cor-aviso);
 }
 
+.previsao-resumo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espaco-2);
+  margin: var(--espaco-3) 0;
+}
+
+.previsao-resumo > div {
+  padding: var(--espaco-2);
+  border: 0.0625rem solid var(--cor-borda);
+  border-radius: calc(var(--raio) * 0.7);
+  background: var(--cor-superficie-elevada);
+}
+
+.previsao-resumo dt,
+.previsao-horarios span {
+  color: var(--cor-texto-secundario);
+  font-size: 0.72rem;
+}
+
+.previsao-resumo dd {
+  margin: 0.2rem 0 0;
+  color: var(--cor-texto);
+  font-weight: 800;
+}
+
+.previsao-subtitulo {
+  margin-top: var(--espaco-4);
+  font-size: 1rem;
+}
+
+.previsao-horarios {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--espaco-2);
+  margin: var(--espaco-2) 0 var(--espaco-3);
+  padding: 0;
+  list-style: none;
+}
+
+.previsao-horarios li {
+  display: grid;
+  gap: 0.1rem;
+  padding: var(--espaco-2);
+  border-left: 0.2rem solid var(--cor-aviso);
+  background: var(--cor-superficie-elevada);
+}
+
+.previsao-horarios time,
+.previsao-horarios strong {
+  font-size: 0.82rem;
+}
+
+.previsao-metadados {
+  font-size: 0.75rem;
+}
+
+.previsao-metadados span {
+  display: block;
+}
+
 @media (min-width: 48rem) {
   .painel-chuvas {
     grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.8fr);

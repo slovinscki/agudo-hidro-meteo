@@ -65,7 +65,7 @@
     <header>
       <a href="#conteudo-principal"> Plataforma Hidrometeorológica de Agudo </a>
 
-      <p>Agudo, RS</p>
+      <p id="cabecalho-local">Agudo, RS</p>
 
       <nav aria-label="Navegação principal">
         <ul>
@@ -204,9 +204,16 @@
           <p class="selo-tipo-dado">Previsão meteorológica</p>
           <h2 id="chuva-prevista-titulo">Chuva prevista</h2>
           <p id="chuva-prevista-status" aria-live="polite">
-            Previsão de chuva ainda não integrada.
+            Consultando a previsão horária...
           </p>
-          <small>Consulte os avisos oficiais do INMET enquanto a previsão não estiver disponível.</small>
+          <dl id="chuva-prevista-resumo" class="previsao-resumo"></dl>
+          <h3 class="previsao-subtitulo">Próximas horas</h3>
+          <ol id="chuva-prevista-horarios" class="previsao-horarios"></ol>
+          <p class="previsao-metadados">
+            <span id="chuva-prevista-emissao"></span>
+            Fonte: <a id="chuva-prevista-fonte" href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>.
+            Dado previsto por modelo meteorológico; não representa observação nem alerta oficial.
+          </p>
         </section>
       </div>
 
