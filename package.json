@@ -12,8 +12,7 @@
     "db:migrate": "node scripts/migrate.js"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.0.2",
-    "@vercel/analytics": "^2.0.1"
+    "@neondatabase/serverless": "^1.0.2"
   },
   "devDependencies": {
     "vercel": "^58.11.0"
